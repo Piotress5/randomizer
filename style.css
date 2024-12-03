@@ -1,0 +1,106 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma;
+}
+
+header {
+    z-index: 1;
+    position: relative;
+    /* height: 10vh; */
+}
+
+section {
+    height: 200vh;
+    position: relative;
+}
+
+nav {
+    width: 100%;
+    height: 10vh;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgb(255, 225, 162);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    /* box-shadow: 0px 2px 20px black; */
+}
+
+div#logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul.menu {
+    list-style-type: none;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+li.application {
+    margin: 0 30px;
+    /* cursor: pointer; */
+}
+
+li.settings {
+    margin: 0 5vw;
+}
+
+/* ^ menu nawigacyjne */
+
+div.frontpage {
+    height: 100vh;
+    width: 100%;
+    /* background: linear-gradient(to bottom, black 20%, transparent 70%, black); */
+    position: relative;
+}
+
+video#frontback {
+    width: 100%;
+    min-height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: -1;
+    object-fit: cover;
+}
+
+div.fronttext {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+div.fronttext > h1 {
+    color: white;
+    font-size: 300%;
+    text-shadow: 0px 0px 10px black;
+}
+
+div.separator {
+    height: 30vh;
+    background: linear-gradient(to bottom, transparent 10%, black 50%);
+}
+
+div.applications {
+    width: 100%;
+    height: 170vh;
+    background-color: #cccccc;
+}
+
+div.tlo {
+    min-height: 500px;
+    background-image: url("img/background2.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
