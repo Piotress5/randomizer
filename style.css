@@ -18,10 +18,15 @@ nav {
     position: fixed;
     top: 0;
     left: 0;
-    background: rgb(255, 225, 162);
-    background: rgba(255, 255, 255, 0.2);
+    /* background: rgb(255, 225, 162); */
+    background: rgba(3, 51, 95, 0.2);
     color: white;
     /* box-shadow: 0px 2px 20px black; */
+    transition: 0.3s;
+}
+
+nav.scrolled {
+    background: rgba(3, 51, 95, 0.8);
 }
 
 div#logo {
@@ -41,16 +46,35 @@ ul.menu {
 }
 
 li.application {
-    margin: 0 30px;
-    /* cursor: pointer; */
+    padding: 0 30px;
+    border-bottom: 4px solid transparent;
+    cursor: pointer;
+    height: 75%;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    transition: border 0.3s;
+}
+
+li.application:hover {
+    border-bottom: 4px solid rgb(167, 195, 219);
 }
 
 li.settings {
     margin: 0 5vw;
+    cursor: pointer;
+}
+
+li.settings svg {
+    transition: 0.3s;
+}
+
+li.settings svg:hover {
+    transform: rotate(45deg);
 }
 
 footer {
-    background: rgb(2, 30, 55);
+    background: rgb(3, 51, 95);
     color: white;
     display: grid;
     grid-template-columns: 80% 20%;
@@ -121,7 +145,7 @@ div.separator {
 
 div.choose {
     height: 40vh;
-    background: rgb(2, 30, 55);
+    background: rgb(3, 51, 95);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -140,7 +164,7 @@ div.applications {
     background-image: url("img/background2.jpg");
     background-attachment: fixed;
     background-position: center;
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat; */
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -161,7 +185,8 @@ div.appcard {
     width: 65%;
     height: 58vh;
     /* background: white; */
-    background: rgb(167, 195, 219);
+    /* background: rgb(167, 195, 219); */
+    background: linear-gradient(to right, rgb(167, 195, 219) 55%, white 70%);
     border-radius: 15px;
     display: grid;
     grid-template-columns: 60% 40%;

@@ -6,64 +6,79 @@
   <meta name="description" content="Randomizer">
   <meta name="author" content="Piotress5">
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
   <title>Randomizer</title>
 </head>
 <body>
   <header>
     <nav>
-      <div id="logo">Logo</div>
+      <div id="logo">
+        <a href="https://piotress5.github.io/">
+          <svg fill="#ffffff" id="home" width="60px" height="60px" viewBox="-50 -50 600 600">
+            <path id="dach" d="M487.083,225.514l-75.08-75.08V63.704c0-15.682-12.708-28.391-28.413-28.391c-15.669,0-28.377,12.709-28.377,28.391 v29.941L299.31,37.74c-27.639-27.624-75.694-27.575-103.27,0.05L8.312,225.514c-11.082,11.104-11.082,29.071,0,40.158 c11.087,11.101,29.089,11.101,40.172,0l187.71-187.729c6.115-6.083,16.893-6.083,22.976-0.018l187.742,187.747 c5.567,5.551,12.825,8.312,20.081,8.312c7.271,0,14.541-2.764,20.091-8.312C498.17,254.586,498.17,236.619,487.083,225.514z"></path>
+            <path id="dom" d="M257.561,131.836c-5.454-5.451-14.285-5.451-19.723,0L72.712,296.913c-2.607,2.606-4.085,6.164-4.085,9.877v120.401 c0,28.253,22.908,51.16,51.16,51.16h81.754v-126.61h92.299v126.61h81.755c28.251,0,51.159-22.907,51.159-51.159V306.79 c0-3.713-1.465-7.271-4.085-9.877L257.561,131.836z"></path>
+          </svg>
+        </a>
+      </div>
       <ul class="menu">
         <li class="application">Wheel of Fortune</li>
         <li class="application">RNG</li>
         <li class="application">Opener</li>
-        <li class="settings">Settings</li>
+        <li class="settings">
+          <svg fill="#a8a8a8" id="zebatka" width="40" height="40" viewBox="-1.5 -1.5 37.5 37.5">
+            <path id="obwodka" stroke-linejoin="round" stroke="#5c5c5c" stroke-width="2.5" d="M34.5,20.375v-6.25h-4.514c-0.32-1.313-0.838-2.545-1.521-3.669l3.193-3.193l-4.42-4.419l-3.193,3.193 c-1.125-0.683-2.355-1.2-3.67-1.521V0.001h-6.25v4.515c-1.313,0.321-2.546,0.838-3.671,1.521L7.262,2.844L2.843,7.263l3.193,3.193 c-0.684,1.125-1.2,2.357-1.521,3.669H0v6.25h4.516c0.32,1.312,0.838,2.545,1.521,3.669l-3.193,3.191l4.419,4.421l3.192-3.193 c1.125,0.685,2.357,1.2,3.671,1.521v4.516h6.25v-4.516c1.313-0.32,2.545-0.838,3.67-1.521l3.192,3.193l4.421-4.421l-3.193-3.191 c0.685-1.125,1.199-2.355,1.521-3.669H34.5z M17.25,23.5c-3.451,0-6.25-2.798-6.25-6.25S13.799,11,17.25,11s6.25,2.798,6.25,6.25 S20.701,23.5,17.25,23.5z"></path>
+            <path id="srodek" d="M34.5,20.375v-6.25h-4.514c-0.32-1.313-0.838-2.545-1.521-3.669l3.193-3.193l-4.42-4.419l-3.193,3.193 c-1.125-0.683-2.355-1.2-3.67-1.521V0.001h-6.25v4.515c-1.313,0.321-2.546,0.838-3.671,1.521L7.262,2.844L2.843,7.263l3.193,3.193 c-0.684,1.125-1.2,2.357-1.521,3.669H0v6.25h4.516c0.32,1.312,0.838,2.545,1.521,3.669l-3.193,3.191l4.419,4.421l3.192-3.193 c1.125,0.685,2.357,1.2,3.671,1.521v4.516h6.25v-4.516c1.313-0.32,2.545-0.838,3.67-1.521l3.192,3.193l4.421-4.421l-3.193-3.191 c0.685-1.125,1.199-2.355,1.521-3.669H34.5z M17.25,23.5c-3.451,0-6.25-2.798-6.25-6.25S13.799,11,17.25,11s6.25,2.798,6.25,6.25 S20.701,23.5,17.25,23.5z"></path>
+          </svg>
+        </li>
       </ul>
     </nav>
   </header>
   <section>
-    <div class="frontpage">
-      <video id="frontback" src="img/background1.mp4" muted autoplay loop></video>
-      <div class="fronttext">
-        <h1>Randomizer</h1>
-      </div>
-    </div>
-    <div class="separator"></div>
-    <div class="choose">
-      <h1>Choose application</h1>
-    </div>
-    <div class="applications">
-      <div class="appcard">
-        <div class="appdesc">
-          <h2>Wheel of Fortune</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Nam gravida, urna sed tincidunt mollis, odio risus facilisis metus,
-            sit amet faucibus arcu nibh a lorem. Sed scelerisque ultrices massa
-            quis eleifend. Maecenas mi orci, suscipit a tellus ut, pretium dapibus odio.</p>
-            <button type="button">Spin</button>
+    <div class="homepage">
+      <div class="frontpage">
+        <video id="frontback" src="img/background1.mp4" muted autoplay loop></video>
+        <div class="fronttext">
+          <h1>Randomizer</h1>
         </div>
-        <div class="appshow"></div>
       </div>
-      <div class="appcard">
-        <div class="appdesc">
-          <h2>RNG</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Nam gravida, urna sed tincidunt mollis, odio risus facilisis metus,
-            sit amet faucibus arcu nibh a lorem. Sed scelerisque ultrices massa
-            quis eleifend. Maecenas mi orci, suscipit a tellus ut, pretium dapibus odio.</p>
-            <button type="button">Generate</button>
-        </div>
-        <div class="appshow"></div>
+      <div class="separator"></div>
+      <div class="choose">
+        <h1>Choose application</h1>
       </div>
-      <div class="appcard">
-        <div class="appdesc">
-          <h2>Opener</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Nam gravida, urna sed tincidunt mollis, odio risus facilisis metus,
-            sit amet faucibus arcu nibh a lorem. Sed scelerisque ultrices massa
-            quis eleifend. Maecenas mi orci, suscipit a tellus ut, pretium dapibus odio.</p>
-            <button type="button">Open</button>
+      <div class="applications">
+        <div class="appcard">
+          <div class="appdesc">
+            <h2>Wheel of Fortune</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Nam gravida, urna sed tincidunt mollis, odio risus facilisis metus,
+              sit amet faucibus arcu nibh a lorem. Sed scelerisque ultrices massa
+              quis eleifend. Maecenas mi orci, suscipit a tellus ut, pretium dapibus odio.</p>
+              <button type="button">Spin</button>
+          </div>
+          <div class="appshow"></div>
         </div>
-        <div class="appshow"></div>
+        <div class="appcard">
+          <div class="appdesc">
+            <h2>RNG</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Nam gravida, urna sed tincidunt mollis, odio risus facilisis metus,
+              sit amet faucibus arcu nibh a lorem. Sed scelerisque ultrices massa
+              quis eleifend. Maecenas mi orci, suscipit a tellus ut, pretium dapibus odio.</p>
+              <button type="button">Generate</button>
+          </div>
+          <div class="appshow"></div>
+        </div>
+        <div class="appcard">
+          <div class="appdesc">
+            <h2>Opener</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Nam gravida, urna sed tincidunt mollis, odio risus facilisis metus,
+              sit amet faucibus arcu nibh a lorem. Sed scelerisque ultrices massa
+              quis eleifend. Maecenas mi orci, suscipit a tellus ut, pretium dapibus odio.</p>
+              <button type="button">Open</button>
+          </div>
+          <div class="appshow"></div>
+        </div>
       </div>
     </div>
   </section>
