@@ -35,6 +35,12 @@ div#logo {
     align-items: center;
 }
 
+div#logo svg {transition: 0.3s;}
+
+div#logo svg:hover {
+    scale: 1.1;    
+}
+
 ul.menu {
     list-style-type: none;
     width: 100%;
@@ -102,7 +108,6 @@ footer img:hover {
 }
 
 /* ^ główne ustawienia */
-
 section {
     height: 440vh;
     position: relative;
@@ -229,4 +234,66 @@ div.appdesc > button:active {
 div.appshow {
     /* background: yellow; */
     border-left: 1px solid black;
+}
+
+/* ^ strona główna */
+div.settingspage {
+    width: 40%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: -40%;
+    background: rgba(128, 128, 128, 0.5);
+    color: white;
+    z-index: 10;
+    transition: 0.4s;
+}
+
+div.settings_visible {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+div.settingspage svg#cross {
+    position: absolute;
+    top: 3%;
+    right: 5%;
+    cursor: pointer;
+}
+
+div.settingspage h2 {
+    color: white;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    font-size: 200%;
+}
+
+div.clickables {
+    width: 70%;
+    height: 20%;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    display: grid;
+    grid-template-columns: 40% 40%;
+    justify-content: center;
+    align-items: center;
+    font-size: 200%;
+}
+
+div.clickables label {
+    justify-self: left;
+}
+
+div.clickables input {
+    justify-self: right;
+}
+
+input[type="checkbox"] {
+    width: 40px;
+    height: 40px;
 }
