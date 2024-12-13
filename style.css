@@ -107,6 +107,22 @@ footer img:hover {
     box-shadow: 0 0 20px 5px black;
 }
 
+@media screen and (max-width: 1000px), (max-height: 500px) {
+    nav {
+        height: auto;
+    }
+    nav svg {
+        scale: 0.50;
+    }
+    div#logo svg:hover {
+        scale: 0.55;    
+    }
+    li.application {
+        font-size: 10px;
+        padding: 0 15px;
+    }
+}
+
 /* ^ główne ustawienia */
 section {
     height: 440vh;
@@ -177,15 +193,6 @@ div.applications {
     align-items: center;
 }
 
-/* div.tlo {
-    min-height: 500px;
-    background-image: url("img/background2.jpg");
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-} */
-
 div.appcard {
     width: 65%;
     height: 58vh;
@@ -234,6 +241,48 @@ div.appdesc > button:active {
 div.appshow {
     /* background: yellow; */
     border-left: 1px solid black;
+}
+
+@media screen and (max-width: 1000px), (max-height: 500px) {
+    div.fronttext h1 {
+        font-size: 45px;
+    }
+    div.choose h1 {
+        font-size: 25px;
+    }
+    div.appcard {
+        /* width: 85%; */
+        /* height: 75vh; */
+        grid-template-columns: auto;
+        grid-template-rows: 60% 40%;
+        background: linear-gradient(to bottom, rgb(167, 195, 219) 55%, white 70%);
+        position: relative;
+    }
+    div.appdesc h2 {
+        /* font-size: 80%; */
+        font-size: 24px;
+        -webkit-text-stroke-width: 1px;
+        margin: 0 0 5px 0;
+    }
+    div.appdesc p {
+        /* font-size: 50%; */
+        font-size: 12px;
+    }
+    div.appdesc button {
+        font-size: 75%;
+        width: 110px;
+        /* margin: 5px auto 0 0; */
+        position: absolute;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+    div.appshow {
+        /* background: yellow; */
+        border-left: none;
+        border-top: 1px solid black;
+        height: 40%;
+    }
 }
 
 /* ^ strona główna */
@@ -296,4 +345,29 @@ div.clickables input {
 input[type="checkbox"] {
     width: 40px;
     height: 40px;
+    cursor: pointer;
 }
+
+@media screen and (max-width: 1000px), (max-height: 500px) {
+    div.settingspage {
+        width: 100%;
+        /* left: -40%; */
+        position: fixed;
+        top: 0;
+        left: -100%;
+    }
+    div.settings_visible {
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    div.settingspage h2 {
+        width: 100%;
+        /* top: 10%;
+        left: 50%;
+        transform: translate(-50%, 0%); */
+        text-align: center;
+    }
+}
+
+/* ^ boczne ustawienia */
