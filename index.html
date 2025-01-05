@@ -14,7 +14,7 @@
     <nav>
       <div id="logo">
         <a href="https://piotress5.github.io/">
-          <svg fill="#ffffff" id="home" width="60px" height="60px" viewBox="-50 -50 600 600">
+          <svg fill="#ffffff" id="home" width="60" height="60" viewBox="-50 -50 600 600">
             <path id="dach" d="M487.083,225.514l-75.08-75.08V63.704c0-15.682-12.708-28.391-28.413-28.391c-15.669,0-28.377,12.709-28.377,28.391 v29.941L299.31,37.74c-27.639-27.624-75.694-27.575-103.27,0.05L8.312,225.514c-11.082,11.104-11.082,29.071,0,40.158 c11.087,11.101,29.089,11.101,40.172,0l187.71-187.729c6.115-6.083,16.893-6.083,22.976-0.018l187.742,187.747 c5.567,5.551,12.825,8.312,20.081,8.312c7.271,0,14.541-2.764,20.091-8.312C498.17,254.586,498.17,236.619,487.083,225.514z"></path>
             <path id="dom" d="M257.561,131.836c-5.454-5.451-14.285-5.451-19.723,0L72.712,296.913c-2.607,2.606-4.085,6.164-4.085,9.877v120.401 c0,28.253,22.908,51.16,51.16,51.16h81.754v-126.61h92.299v126.61h81.755c28.251,0,51.159-22.907,51.159-51.159V306.79 c0-3.713-1.465-7.271-4.085-9.877L257.561,131.836z"></path>
           </svg>
@@ -83,7 +83,7 @@
     </div>
   </section>
   <div class="settingspage">
-  <svg fill="white" id="cross" width="40" height="40" viewBox="0 0 460.775 460.775">
+    <svg fill="white" id="cross" width="40" height="40" viewBox="0 0 460.775 460.775">
       <path id="krzyzyk" d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55 c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55 c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505 c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55 l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719 c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"></path>
     </svg>
     <h2>Main settings</h2>
@@ -94,8 +94,63 @@
       <input type="checkbox" name="sounds" id="sounds" checked>
     </div>
   </div>
+  <div class="generator">
+    <div class="return">
+      <svg fill="#ffffff" id="strzalka" width="40" height="40" viewBox="0 0 400 400">
+        <polygon points="476.213,223.107 57.427,223.107 151.82,128.713 130.607,107.5 0,238.106 130.607,368.714 151.82,347.5 57.427,253.107 476.213,253.107 "></polygon>
+      </svg>
+      <h2>Back</h2>
+    </div>
+    <div class="rng-front">
+      <h1 class="rng-title">Title</h1>
+      <div class="rng-result">
+        <p class="rng-result-value">ABC</p>
+        <p class="rng-counter"></p>
+      </div>
+      <button class="rng-generate">Randomize</button>
+    </div>
+    <h1 class="rng-settings">Settings</h1>
+    <div class="rng-title-edit">
+      <label for="rng-title">Edit title: </label>
+      <input type="text" name="rng-title" id="rng-title" value="Title" size="50" spellcheck="false">
+    </div>
+    <div class="rng-options">
+      <div class="rng-option rng-option-label">
+        <label for="if-number">Number: </label>
+        <input type="radio" name="generated-value" id="if-number">
+      </div>
+      <div class="rng-option rng-option-number rng-disabled">
+        <span>Range: </span>
+        <label for="number-min">From: </label>
+        <input type="number" name="number-min" id="number-min" value="0" disabled>
+        <label for="number-max">To: </label>
+        <input type="number" name="number-max" id="number-max" value="0" disabled>
+      </div>
+      <div class="rng-option rng-option-label">
+        <label for="if-text">Text: </label>
+        <input type="radio" name="generated-value" id="if-text">
+      </div>
+      <div class="rng-option rng-option-text rng-disabled">
+        <label for="rng-texts">Words <span>(separated with ";")</span>: </label>
+        <textarea name="rng-texts" id="rng-texts" cols="30" rows="10" spellcheck="false" disabled></textarea>
+      </div>
+      <div class="rng-option rng-option-label">
+        <label for="if-yes-no">Yes/No: </label>
+        <input type="radio" name="generated-value" id="if-yes-no">
+      </div>
+      <div class="rng-option rng-option-yes-no rng-disabled">
+        <label for="rng-yes-no">Enable counter: </label>
+        <input type="checkbox" name="rng-yes-no" id="rng-yes-no" disabled>
+      </div>
+    </div>
+    <div class="rng-buttons">
+      <button class="rng-reset">Reset</button>
+      <button class="rng-apply">Apply</button>
+    </div>
+  </div>
+  <div class="alert">Lorem Ipsum</div>
   <footer>
-    <p class="info"><em>Copyright 2024 © Piotr Cieśla</em></p>
+    <p class="info"><em>Copyright 2025 © Piotr Cieśla</em></p>
     <a href="https://github.com/Piotress5">
       <img src="img/github-mark-white.png" alt="github">
     </a>

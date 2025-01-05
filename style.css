@@ -29,13 +29,20 @@ nav.scrolled {
     background: rgba(3, 51, 95, 0.8);
 }
 
+nav.hidden {
+    top: -10vh;
+}
+
 div#logo {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-div#logo svg {transition: 0.3s;}
+div#logo svg {
+    filter: drop-shadow(0 0 5px black);
+    transition: 0.3s;
+}
 
 div#logo svg:hover {
     scale: 1.1;    
@@ -72,11 +79,23 @@ li.settings {
 }
 
 li.settings svg {
+    filter: drop-shadow(0 0 5px black);
     transition: 0.3s;
 }
 
 li.settings svg:hover {
     transform: rotate(45deg);
+}
+
+li.settings svg.app {
+    position: relative;
+    top: 11vh;
+    filter: drop-shadow(0 0 10px black);
+    animation: slide-down 0.4s 1;
+}
+@keyframes slide-down {
+    0%   {top: 0;}
+    100% {top: 11vh;}
 }
 
 footer {
@@ -127,6 +146,13 @@ footer img:hover {
 section {
     height: 440vh;
     position: relative;
+}
+
+section.hidden {
+    /* scale: 1.1; */
+    opacity: 0;
+    overflow: hidden;
+    transition: 1s;
 }
 
 div.frontpage {
@@ -203,6 +229,7 @@ div.appcard {
     display: grid;
     grid-template-columns: 60% 40%;
     box-shadow: 0px 0px 25px gray;
+    transition: 0.7s;
 }
 
 div.appdesc {
@@ -308,6 +335,7 @@ div.settingspage svg#cross {
     position: absolute;
     top: 3%;
     right: 5%;
+    filter: drop-shadow(0 0 5px black);
     cursor: pointer;
 }
 
@@ -318,6 +346,7 @@ div.settingspage h2 {
     left: 50%;
     transform: translate(-50%, 0%);
     font-size: 200%;
+    filter: drop-shadow(0 0 5px black);
 }
 
 div.clickables {
@@ -336,17 +365,51 @@ div.clickables {
 
 div.clickables label {
     justify-self: left;
+    filter: drop-shadow(0 0 5px black);
 }
 
 div.clickables input {
     justify-self: right;
-}
-
-input[type="checkbox"] {
     width: 40px;
     height: 40px;
     cursor: pointer;
+    filter: drop-shadow(0 0 5px black);
 }
+
+/* input[type="checkbox"] {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+} */
+
+div.alert {
+    width: 350px;
+    height: 170px;
+    position: fixed;
+    top: -50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border-radius: 10px;
+    font-size: 150%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0s, top 0.7s;
+}
+
+div.alert-red {
+    background: rgba(199, 0, 0, 0.6);
+    border: 3px solid red;
+    color: red;
+}
+
+div.alert-green {
+    background: rgba(0, 133, 0, 0.6);
+    border: 3px solid rgb(0, 185, 0);
+    color: rgb(0, 209, 0);
+}
+
+div.alert-visible {top: 5%;}
 
 @media screen and (max-width: 1000px), (max-height: 500px) {
     div.settingspage {
@@ -371,3 +434,252 @@ input[type="checkbox"] {
 }
 
 /* ^ boczne ustawienia */
+div.generator {
+    min-height: 150vh;
+    /* position: fixed;
+    top: 0;
+    left: 0; */
+    background: radial-gradient(rgb(167, 195, 219), rgb(3, 51, 95));
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 1;
+    animation: none 1s 1;
+}
+@keyframes fade-in {
+    0%   {opacity: 0;}
+    100% {opacity: 1;}
+}
+@keyframes fade-out {
+    0%   {opacity: 1; top: 0;}
+    100% {opacity: 0; top: 100%;}
+}
+
+div.return {
+    position: fixed;
+    top: 3%;
+    left: 3%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    filter: drop-shadow(0 0 10px black);
+}
+
+div.return h2 {
+    margin-left: 8px;
+    margin-top: 4px;
+    color: white;
+}
+
+div.rng-front {
+    margin-top: 7%;
+    width: 80%;
+    height: 700px;
+    background: 
+    repeating-linear-gradient(310deg, rgba(128,128,128,0.4) 12%,
+   rgba(211,211,211,0.3) 32%, rgba(128,128,128,0.4) 40%,
+   rgba(128,128,128,0.4) 60%);
+    border: 6px solid rgb(3, 51, 95);
+    border-radius: 50px;
+    display: grid;
+    grid-template: 80px / 60% 40%;
+    align-items: center;
+}
+
+h1.rng-title {
+    color: white;
+    grid-column: 1 / span 2;
+    text-align: center;
+    font-size: 250%;
+    filter: drop-shadow(0 0 10px black);
+}
+
+div.rng-result {
+    width: 90%;
+    height: 90%;
+    background: rgb(167, 195, 219);
+    border: 4px solid rgb(3, 51, 95);
+    border-radius: 20px;
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+p.rng-result-value {
+    font-size: 300%;
+}
+
+/* na wyniki długie lub gdy jest ich dużo */
+p.rng-result-value-bigger {
+    width: 95%;
+    height: 95%;
+    font-size: 200%;
+}
+
+p.rng-counter {
+    position: absolute;
+    bottom: 5%;
+    visibility: hidden;
+}
+
+button.rng-generate {
+    width: 60%;
+    height: 30%;
+    justify-self: center;
+    background: rgb(37, 122, 196);
+    border: 4px solid rgb(3, 51, 95);
+    border-radius: 20px;
+    font-size: 200%;
+    color: white;
+    cursor: pointer;
+}
+
+button.rng-generate:hover {
+    background: rgb(39, 130, 209);
+}
+
+button.rng-generate:active {
+    background: rgb(31, 103, 167);
+}
+
+h1.rng-settings {
+    margin: 10% 0 3% 0;
+    color: white;
+    font-size: 250%;
+    filter: drop-shadow(0 0 10px black);
+}
+
+div.rng-title-edit {
+    width: 60%;
+    margin: 5%;
+    display: grid;
+    grid-template-columns: auto 80%;
+    /* justify-content: center; */
+    font-weight: bold;
+    font-size: 200%;
+    color: white;
+}
+
+div.rng-title-edit input {
+    height: 40px;
+}
+
+div.rng-options {
+    width: 75%;
+    margin: 20px;
+    display: grid;
+    grid-template-columns: 20% auto;
+    column-gap: 15%;
+}
+
+div.rng-option {
+    margin: 40px 0;
+    color: white;
+    font-size: 200%;
+}
+
+div.rng-title-edit label, div.rng-option label, div.rng-option span {
+    filter: drop-shadow(0 0 5px black);
+}
+
+div.rng-option-label {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    /* font-size: 200%; */
+}
+
+div.rng-option-label label {
+    justify-self: left;
+}
+
+div.rng-option-label input {
+    justify-self: right;
+}
+
+div.rng-option:nth-of-type(3) {
+    align-items: center;
+}
+
+input[type="radio"] {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+div.rng-option-number {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+div.rng-option-number label {
+    font-size: 75%;
+    justify-self: end;
+    align-self: center;
+}
+
+div.rng-option-number input {
+    margin-left: 5px;
+    width: 10em;
+}
+
+div.rng-option-text, div.rng-option-yes-no {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+div.rng-option-text label {
+    justify-self: left;
+    align-self: center;
+}
+
+div.rng-option-text label span {
+    font-size: 75%;
+}
+
+div.rng-option-text textarea {
+    resize: none;
+}
+
+div.rng-option-yes-no input {
+    width: 40px;
+    height: 40px;
+    justify-self: center;
+    cursor: pointer;
+}
+
+div.rng-buttons {
+    height: 25vh;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+button.rng-reset, button.rng-apply {
+    width: 150px;
+    height: 80px;
+    background: rgb(37, 122, 196);
+    border: 4px solid rgb(3, 51, 95);
+    border-radius: 15px;
+    font-size: 150%;
+    color: white;
+    cursor: pointer;
+}
+
+button.rng-reset:hover, button.rng-apply:hover {
+    background: rgb(39, 130, 209);
+}
+
+button.rng-reset:active, button.rng-apply:active {
+    background: rgb(31, 103, 167);
+}
+
+div.rng-disabled {
+    color: gray;
+    filter: blur(3px);
+    transition: 0.4s;
+}
