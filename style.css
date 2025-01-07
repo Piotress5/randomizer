@@ -4,6 +4,8 @@
     font-family: Verdana, Geneva, Tahoma;
 }
 
+body {position: relative;}
+
 header {
     z-index: 1;
     position: relative;
@@ -376,12 +378,6 @@ div.clickables input {
     filter: drop-shadow(0 0 5px black);
 }
 
-/* input[type="checkbox"] {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-} */
-
 div.alert {
     width: 350px;
     height: 170px;
@@ -411,6 +407,13 @@ div.alert-green {
 
 div.alert-visible {top: 5%;}
 
+div.application_end {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
 @media screen and (max-width: 1000px), (max-height: 500px) {
     div.settingspage {
         width: 100%;
@@ -436,9 +439,6 @@ div.alert-visible {top: 5%;}
 /* ^ boczne ustawienia */
 div.generator {
     min-height: 150vh;
-    /* position: fixed;
-    top: 0;
-    left: 0; */
     background: radial-gradient(rgb(167, 195, 219), rgb(3, 51, 95));
     display: none;
     justify-content: center;
@@ -452,8 +452,8 @@ div.generator {
     100% {opacity: 1;}
 }
 @keyframes fade-out {
-    0%   {opacity: 1; top: 0;}
-    100% {opacity: 0; top: 100%;}
+    0%   {opacity: 1;}
+    100% {opacity: 0;}
 }
 
 div.return {
@@ -465,6 +465,7 @@ div.return {
     align-items: center;
     cursor: pointer;
     filter: drop-shadow(0 0 10px black);
+    z-index: 10;
 }
 
 div.return h2 {
@@ -514,7 +515,7 @@ p.rng-result-value {
 }
 
 /* na wyniki długie lub gdy jest ich dużo */
-p.rng-result-value-bigger {
+p.rng-result-value-small {
     width: 95%;
     height: 95%;
     font-size: 200%;
@@ -558,7 +559,6 @@ div.rng-title-edit {
     margin: 5%;
     display: grid;
     grid-template-columns: auto 80%;
-    /* justify-content: center; */
     font-weight: bold;
     font-size: 200%;
     color: white;
@@ -589,7 +589,6 @@ div.rng-title-edit label, div.rng-option label, div.rng-option span {
 div.rng-option-label {
     display: grid;
     grid-template-columns: 80% 20%;
-    /* font-size: 200%; */
 }
 
 div.rng-option-label label {
@@ -683,3 +682,66 @@ div.rng-disabled {
     filter: blur(3px);
     transition: 0.4s;
 }
+
+@media screen and (max-width: 1000px), (max-height: 500px) {
+    div.generator {
+        width: 100%;
+    }
+    div.return {top: 1.5%;}
+    div.rng-front {
+        width: 90%;
+        grid-template: 80px 60% / auto;
+    }
+    h1.rng-title {
+        grid-column: auto;
+        font-size: 175%;
+    }
+    button.rng-generate {
+        width: 90%;
+        height: 70%;
+        border-radius: 40px;
+    }
+    div.rng-title-edit {
+        width: 80%;
+        grid-template-columns: auto;
+    }
+    div.rng-title-edit label {
+        justify-self: left;
+    }
+    div.rng-title-edit input {
+        max-width: 85%;
+    }
+    div.rng-options {
+        width: 90%;
+        margin: 10px;
+        grid-template-columns: auto;
+        column-gap: 15%;
+    }
+    div.rng-option-label {
+        width: 90%;
+        grid-template-columns: 50% 50%;
+        justify-self: center;
+    }
+    div.rng-option:nth-child(even) {
+        grid-template-columns: auto;
+        margin: 0 5%;
+    }
+    div.rng-option-number {gap: 5px;}
+    div.rng-option-number label {
+        justify-self: start;
+    }
+    div.rng-option-number input {
+        height: 2em;
+        width: 100%;
+        margin-left: 0;
+    }
+    div.rng-option-text label span {
+        font-size: 65%;
+    }
+    div.rng-option:nth-child(6) {
+        grid-template-columns: auto 11%;
+    }
+
+}
+
+/* ^ rng generator */

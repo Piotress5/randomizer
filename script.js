@@ -1,13 +1,16 @@
 const menu = document.querySelector("nav");
 const body_height = document.body.scrollHeight;
 const home_video = document.querySelector("video#frontback");
+const menu_app = document.querySelectorAll("li.application");
 const settings_btn = document.querySelector("svg#zebatka");
 const settings_panel = document.querySelector("div.settingspage");
 const settings_cross = document.querySelector("svg#cross");
+const animation_control = document.querySelector('input[name="animations"]');
+const sounds_control = document.querySelector('input[name="sounds"]');
 const frontpage = document.querySelector("section");
 const footer = document.querySelector("footer");
-const app_buttons = document.querySelectorAll("div.appcard button");
 const appcards = document.querySelectorAll("div.appcard");
+const app_buttons = document.querySelectorAll("div.appcard button");
 const app_generator = document.querySelector("div.generator");
 const app_return_btn = document.querySelector("div.return");
 const alert_box = document.querySelector("div.alert");
@@ -24,9 +27,10 @@ const rng_apply_btn = document.querySelector("button.rng-apply");
 const rng_generate = document.querySelector("button.rng-generate");
 const rng_result = document.querySelector("p.rng-result-value");
 const rng_counter = document.querySelector("p.rng-counter");
+let activator = body_height * 0.2;
 let rng_value1, rng_value2, rng_stats = [0, 0];
 let rng_mode = 0;
-let activator = body_height * 0.2;
+let rng_sound = new Audio('media/click.mp3');
 
 //zmiana menu
 window.addEventListener("scroll", function() {
@@ -76,15 +80,25 @@ function alert_info(text, color) {
 }
 
 //przejście pomiędzy aplikacjami
-app_buttons[1].addEventListener("click", app_generator_start);
-function app_generator_start() {
+menu_app[1].addEventListener("click", () => {
+    app_generator_start(app_generator, 1);
+});
+app_buttons[1].addEventListener("click", () => {
+    app_generator_start(app_generator, 1);
+});
+
+app_return_btn.addEventListener("click", () => {
+    app_generator_end(app_generator);
+});
+
+function app_generator_start(application, app_index) {
     frontpage.classList.add("hidden");
-    appcards[1].style.scale = "1.2";
+    appcards[app_index].style.scale = "1.2";
     menu.classList.add("hidden");
     setTimeout(() => {
-        app_generator.style.display = "flex";
-        app_generator.style.animationName = "fade-in";
-        appcards[1].style.scale = "1";
+        application.style.display = "flex";
+        application.style.animationName = "fade-in";
+        appcards[app_index].style.scale = "1";
         frontpage.style.display = "none";
         footer.style.display = "none";
         window.scrollTo(0, 0);
@@ -92,14 +106,15 @@ function app_generator_start() {
     }, 1500);
 }
 
-app_return_btn.addEventListener("click", app_generator_end);
-function app_generator_end() {
+function app_generator_end(application) {
+    application.classList.add("application_end");
     frontpage.classList.remove("hidden");
     settings_btn.classList.remove("app");
-    app_generator.style.animationName = "fade-out";
-    // setTimeout(() => {
-        app_generator.style.display = "none";
-    // }, 900);
+    application.style.animationName = "fade-out";
+    setTimeout(() => {
+        application.style.display = "none";
+        application.classList.remove("application_end");
+    }, 900);
     menu.classList.remove("hidden");
     frontpage.style.display = "inline";
     footer.style.display = "grid";
@@ -108,8 +123,8 @@ function app_generator_end() {
 
 //generator RNG
 rng_radio.forEach(function(rng_settings_view) {
-    rng_settings_view.addEventListener("click", rng_change_view);
-    function rng_change_view() {
+    rng_settings_view.addEventListener("click", rng_change_mode);
+    function rng_change_mode() {
         if (rng_radio[0].checked == true) {
             rng_reset();
             rng_settings[1].classList.remove("rng-disabled");
@@ -175,6 +190,9 @@ rng_yes_no.addEventListener("click", () => {
 
 rng_generate.addEventListener("click", rng_randomize);
 function rng_randomize() {
+    if (sounds_control.checked == true) {
+        rng_sound.play();
+    }
     switch (rng_mode) {
         case 0:
             alert_info("No mode selected!", "alert-red");
@@ -220,3 +238,5 @@ function rng_randomize() {
             break;
     }
 }
+
+// app_generator_start(app_generator, 1);
