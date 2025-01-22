@@ -94,17 +94,82 @@
       <input type="checkbox" name="sounds" id="sounds" checked>
     </div>
   </div>
-  <div class="generator">
-    <div class="return">
-      <svg fill="#ffffff" id="strzalka" width="40" height="40" viewBox="0 0 400 400">
-        <polygon points="476.213,223.107 57.427,223.107 151.82,128.713 130.607,107.5 0,238.106 130.607,368.714 151.82,347.5 57.427,253.107 476.213,253.107 "></polygon>
-      </svg>
-      <h2>Back</h2>
+  <div class="wheel">
+    <div class="wheel-front">
+      <h1 class="wheel-title">Title</h1>
+      <div class="wheel-zone">
+        <div class="wheel-elements">
+          <div class="wheel-element wheel-element-default">Option 1</div>
+          <div class="wheel-element wheel-element-default">Option 2</div>
+          <div class="wheel-element wheel-element-default">Option 3</div>
+          <div class="wheel-element wheel-element-default">Option 4</div>
+          <div class="wheel-element wheel-element-default">Option 5</div>
+          <div class="wheel-element wheel-element-default">Option 6</div>
+          <div class="wheel-element wheel-element-default">Option 7</div>
+          <div class="wheel-element wheel-element-default">Option 8</div>
+        </div>
+        <svg class="wheel-pointer"height="30" width="30">
+          <path d="M5 5 L25 5 L15 25 Z" style="fill:#03335f; stroke:#03335f;"/>
+        </svg>
+        <button class="wheel-spin">Spin</button>
+      </div>
     </div>
+    <h1 class="wheel-settings-title">Settings</h1>
+    <div class="wheel-title-edit">
+      <label for="wheel-title">Edit title: </label>
+      <input type="text" name="wheel-title" id="wheel-title" value="Title" size="50" spellcheck="false">
+    </div>
+    <div class="wheel-settings">
+      <div class="wheel-options-edit">
+        <label for="wheel-options-number">Options: </label>
+        <input type="number" name="wheel-options-number" id="wheel-options-number" value="3" min="2" max="100">
+        <div class="wheel-options-buttons">
+          <div class="wheel-set-buttons">
+            <div class="wheel-plus-minus">
+              <button class="wheel-plus">+</button>
+              <button class="wheel-minus">-</button>
+            </div>
+            <button class="wheel-set">Set</button>
+          </div>
+          <button class="wheel-apply">Apply</button>
+        </div>
+      </div>
+      <div class="wheel-options">
+        <input type="text" name="wheel-option" class="wheel-option" spellcheck="false" placeholder="Option 1">
+        <input type="text" name="wheel-option" class="wheel-option" spellcheck="false" placeholder="Option 2">
+        <input type="text" name="wheel-option" class="wheel-option" spellcheck="false" placeholder="Option 3">
+      </div>
+      <div class="wheel-misc">
+        <button class="wheel-paste-list">Paste options</button>
+        <button class="wheel-edit-colors">Edit colors</button>
+      </div>
+    </div>
+    <div class="wheel-result"></div>
+    <div class="wheel-paste">
+      <h2 class="wheel-paste-header">Paste</h2>
+      <p class="wheel-paste-info">Paste text of your options here. Remember to write only one
+        option per each line.
+      </p>
+      <textarea name="wheel-paste-options" cols="30" rows="10" spellcheck="false" placeholder="Write your options here..."></textarea>
+      <div class="wheel-paste-buttons">
+        <button class="wheel-paste-apply">Apply</button>
+        <button class="wheel-paste-close">Close</button>
+      </div>
+    </div>
+    <div class="wheel-colors">
+      <h2 class="wheel-colors-header">Wheel colors</h2>
+      <input type="color" name="wheel-color" value="#a7c3db">
+      <input type="color" name="wheel-color" value="#06447e">
+      <input type="color" name="wheel-color" value="#43739c">
+      <input type="color" name="wheel-color" value="#3e82bd">
+      <button class="wheel-colors-apply">Apply</button>
+    </div>
+  </div>
+  <div class="generator">
     <div class="rng-front">
       <h1 class="rng-title">Title</h1>
       <div class="rng-result">
-        <p class="rng-result-value">ABC</p>
+        <p class="rng-result-value"></p>
         <p class="rng-counter"></p>
       </div>
       <button class="rng-generate">Randomize</button>
@@ -121,10 +186,10 @@
       </div>
       <div class="rng-option rng-option-number rng-disabled">
         <span>Range: </span>
-        <label for="number-min">From: </label>
-        <input type="number" name="number-min" id="number-min" value="0" disabled>
-        <label for="number-max">To: </label>
-        <input type="number" name="number-max" id="number-max" value="0" disabled>
+        <label for="rng-number-min">From: </label>
+        <input type="number" name="rng-number-min" id="rng-number-min" value="0" disabled>
+        <label for="rng-number-max">To: </label>
+        <input type="number" name="rng-number-max" id="rng-number-max" value="0" disabled>
       </div>
       <div class="rng-option rng-option-label">
         <label for="if-text">Text: </label>
@@ -148,7 +213,13 @@
       <button class="rng-apply">Apply</button>
     </div>
   </div>
-  <div class="alert">Lorem Ipsum</div>
+  <div class="return">
+    <svg fill="#ffffff" id="strzalka" width="40" height="40" viewBox="0 0 400 400">
+      <polygon points="476.213,223.107 57.427,223.107 151.82,128.713 130.607,107.5 0,238.106 130.607,368.714 151.82,347.5 57.427,253.107 476.213,253.107 "></polygon>
+    </svg>
+    <h2>Back</h2>
+  </div>
+  <div class="alert"></div>
   <footer>
     <p class="info"><em>Copyright 2025 © Piotr Cieśla</em></p>
     <a href="https://github.com/Piotress5">

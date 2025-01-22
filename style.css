@@ -378,6 +378,58 @@ div.clickables input {
     filter: drop-shadow(0 0 5px black);
 }
 
+@media screen and (max-width: 1000px), (max-height: 500px) {
+    div.settingspage {
+        width: 100%;
+        /* left: -40%; */
+        position: fixed;
+        top: 0;
+        left: -100%;
+    }
+    div.settings_visible {
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    div.settingspage h2 {
+        width: 100%;
+        /* top: 10%;
+        left: 50%;
+        transform: translate(-50%, 0%); */
+        text-align: center;
+    }
+}
+
+/* ^ boczne ustawienia */
+div.return {
+    position: fixed;
+    top: 3%;
+    left: 3%;
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    filter: drop-shadow(0 0 10px black);
+    opacity: 0;
+    z-index: 10;
+    animation: return-appear 1s 1;
+}
+@keyframes return-appear {
+    0%   {opacity: 0;}
+    50%  {opacity: 1;}
+    100% {opacity: 1;}
+}
+@keyframes return-disappear {
+    0%   {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+div.return h2 {
+    margin-left: 8px;
+    margin-top: 4px;
+    color: white;
+}
+
 div.alert {
     width: 350px;
     height: 170px;
@@ -413,30 +465,476 @@ div.application_end {
     left: 0;
     width: 100%;
 }
-
-@media screen and (max-width: 1000px), (max-height: 500px) {
-    div.settingspage {
-        width: 100%;
-        /* left: -40%; */
-        position: fixed;
-        top: 0;
-        left: -100%;
-    }
-    div.settings_visible {
-        position: fixed;
-        top: 0;
-        left: 0;
-    }
-    div.settingspage h2 {
-        width: 100%;
-        /* top: 10%;
-        left: 50%;
-        transform: translate(-50%, 0%); */
-        text-align: center;
-    }
+@keyframes fade-in {
+    0%   {opacity: 0;}
+    100% {opacity: 1;}
+}
+@keyframes fade-out {
+    0%   {opacity: 1;}
+    100% {opacity: 0;}
 }
 
-/* ^ boczne ustawienia */
+@media screen and (max-width: 1000px), (max-height: 500px) {
+    div.return {top: 1.5%;}
+}
+
+/* ^ wspólne elementy aplikacji */
+div.wheel {
+    min-height: 150vh;
+    background: linear-gradient(to bottom, rgb(167, 195, 219), rgb(3, 51, 95));
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* position: relative; */
+    opacity: 1;
+    animation: none 1s 1;
+}
+
+div.wheel-front {
+    margin-top: 7%;
+    width: 75%;
+    height: 750px;
+    background: 
+    repeating-linear-gradient(310deg, rgba(128, 128, 128, 0.4) 12%,
+   rgba(211, 211, 211, 0.3) 32%, rgba(128, 128, 128, 0.4) 40%,
+   rgba(128, 128, 128, 0.4) 60%);
+    border: 6px solid rgb(3, 51, 95);
+    border-radius: 50px;
+    overflow: hidden;
+    display: grid;
+    grid-template: 80px / auto;
+    align-items: center;
+}
+
+h1.wheel-title {
+    color: white;
+    text-align: center;
+    font-size: 250%;
+    justify-self: center;
+    filter: drop-shadow(0 0 10px black);
+}
+
+div.wheel-zone {
+    width: 600px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    position: relative;
+}
+
+div.wheel-elements {
+    width: 100%;
+    height: 100%;
+    background: repeating-conic-gradient(rgb(167, 195, 219) 22.5deg,
+    rgb(167, 195, 219) 67.5deg, rgb(6, 68, 126) 67.5deg, rgb(6, 68, 126) 112.5deg,
+    rgb(67, 115, 156) 112.5deg, rgb(67, 115, 156) 157.5deg,
+    rgb(62, 130, 189) 157.5deg, rgb(62, 130, 189) 202.5deg);
+    border: 4px solid rgb(3, 51, 95);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transform: rotate(-90deg);
+    animation: rotation 12s infinite linear;
+}
+@keyframes rotation {
+    0%   {rotate: 0deg;}
+    100% {rotate: 360deg;}
+}
+
+div.wheel-element {
+    position: absolute;
+    color: white;
+    filter: drop-shadow(0 0 3px black);
+}
+
+div.wheel-element-default:nth-child(1) {
+    transform: rotate(0deg) translate(175px) rotate(0deg);
+}
+div.wheel-element-default:nth-child(2) {
+    transform: rotate(45deg) translate(175px) rotate(0deg);
+}
+div.wheel-element-default:nth-child(3) {
+    transform: rotate(90deg) translate(175px) rotate(0deg);
+}
+div.wheel-element-default:nth-child(4) {
+    transform: rotate(135deg) translate(175px) rotate(0deg);
+}
+div.wheel-element-default:nth-child(5) {
+    transform: rotate(180deg) translate(175px) rotate(0deg);
+}
+div.wheel-element-default:nth-child(6) {
+    transform: rotate(225deg) translate(175px) rotate(0deg);
+}
+div.wheel-element-default:nth-child(7) {
+    transform: rotate(270deg) translate(175px) rotate(0deg);
+}
+div.wheel-element-default:nth-child(8) {
+    transform: rotate(315deg) translate(175px) rotate(0deg);
+}
+
+svg.wheel-pointer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+button.wheel-spin {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(3, 51, 95);
+    border: none;
+    border-radius: 50%;
+    font-size: 175%;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    animation: none 1s 1 forwards;
+}
+@keyframes text-color-in {
+    0%   {color: transparent;}
+    100% {color: white;}
+}
+@keyframes text-color-out {
+    0%   {color: white;}
+    100% {color: transparent;}
+}
+
+button.wheel-spin:hover {
+    filter: drop-shadow(0 0 3px white);
+}
+
+h1.wheel-settings-title {
+    margin: 10% 0 3% 0;
+    color: white;
+    font-size: 250%;
+    filter: drop-shadow(0 0 10px black);
+}
+
+div.wheel-title-edit {
+    width: 60%;
+    margin: 5%;
+    display: grid;
+    grid-template-columns: auto 80%;
+    font-weight: bold;
+    font-size: 200%;
+    color: white;
+}
+
+div.wheel-title-edit label, div.wheel-options-edit label {
+    filter: drop-shadow(0 0 10px black);
+}
+
+div.wheel-title-edit input {
+    height: 40px;
+}
+
+div.wheel-settings {
+    width: 75%;
+    margin: 20px;
+    display: grid;
+    grid-template-columns: auto;
+    gap: 50px;
+}
+
+div.wheel-options-edit {
+    color: white;
+    display: grid;
+    align-items: center;
+    /* grid-template-columns: auto auto 70%; */
+    grid-template-columns: 20% 10% 70%;
+    justify-self: center;
+    width: 85%;
+}
+
+div.wheel-options-edit label {
+    font-size: 200%;
+    justify-self: center;
+}
+
+div.wheel-options-edit input {
+    width: 70px;
+    height: 40px;
+    font-size: 150%;
+}
+
+div.wheel-options-buttons {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.wheel-set-buttons {
+    display: grid;
+    grid-template-columns: 50px auto;
+}
+
+div.wheel-plus-minus {
+    display: flex;
+    flex-direction: column;
+}
+
+button.wheel-plus, button.wheel-minus {
+    width: 40px;
+    height: 40px;
+}
+
+button.wheel-set, button.wheel-apply {
+    width: 150px;
+    height: 80px;
+}
+
+button.wheel-plus, button.wheel-minus, button.wheel-set, button.wheel-apply {
+    background: rgb(37, 122, 196);
+    border: 4px solid rgb(3, 51, 95);
+    border-radius: 15px;
+    font-size: 150%;
+    color: white;
+    cursor: pointer;
+}
+
+button.wheel-set:hover, button.wheel-apply:hover,
+button.wheel-plus:hover, button.wheel-minus:hover {
+    background: rgb(39, 130, 209);
+}
+
+button.wheel-set:active, button.wheel-apply:active,
+button.wheel-plus:active, button.wheel-minus:active {
+    background: rgb(31, 103, 167);
+}
+
+div.wheel-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.wheel-options input {
+    width: 85%;
+    height: 40px;
+    margin: 10px 0;
+}
+
+div.wheel-misc {
+    height: 20vh;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+    align-items: center;
+}
+
+button.wheel-paste-list, button.wheel-edit-colors {
+    width: 200px;
+    height: 80px;
+    background: rgb(37, 122, 196);
+    border: 4px solid rgb(3, 51, 95);
+    border-radius: 15px;
+    font-size: 150%;
+    color: white;
+    cursor: pointer;
+}
+
+button.wheel-paste-list:hover, button.wheel-edit-colors:hover,
+div.wheel-paste-buttons button:hover, button.wheel-colors-apply:hover {
+    background: rgb(39, 130, 209);
+}
+
+button.wheel-paste-list:active, button.wheel-edit-colors:active,
+div.wheel-paste-buttons button:active, button.wheel-colors-apply:active {
+    background: rgb(31, 103, 167);
+}
+
+div.wheel-result {
+    width: 400px;
+    height: 250px;
+    background: 
+    repeating-linear-gradient(310deg, rgba(128, 128, 128, 0.6) 12%,
+   rgba(211, 211, 211, 0.5) 32%, rgba(128, 128, 128, 0.6) 40%,
+   rgba(128, 128, 128, 0.6) 60%);
+    border: 4px solid rgb(3, 51, 95);
+    border-radius: 10px;
+    color: white;
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black;
+    text-align: center;
+    position: fixed;
+    top: -50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 175%;
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    transition: all 0s, visibility 0.4s, top 0.7s;
+}
+
+div.wheel-result-visible {top: 20%; visibility: visible;}
+
+div.wheel-paste {
+    width: 600px;
+    height: 400px;
+    padding: 0 20px;
+    background: rgb(67, 115, 156);
+    border: 6px solid rgb(3, 51, 95);
+    border-radius: 10px;
+    position: fixed;
+    top: -50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    visibility: hidden;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    transition: visibility 0.4s, top 0.7s;
+}
+
+div.wheel-paste-visible {top: 5%; visibility: visible;}
+
+h2.wheel-paste-header, p.wheel-paste-info, h2.wheel-colors-header {
+    color: white;
+    filter: drop-shadow(0 0 5px black);
+}
+
+div.wheel-paste-buttons {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.wheel-paste-buttons button {
+    height: 70px;
+}
+
+div.wheel-paste-buttons button, div.wheel-colors button {
+    width: 100px;
+    background: rgb(37, 122, 196);
+    border: 4px solid rgb(3, 51, 95);
+    border-radius: 15px;
+    font-size: 150%;
+    color: white;
+    cursor: pointer;
+}
+
+div.wheel-colors {
+    width: 300px;
+    height: 350px;
+    padding: 0 20px;
+    background: rgb(67, 115, 156);
+    border: 6px solid rgb(3, 51, 95);
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    right: -50%;
+    transform: translate(0%, -50%);
+    visibility: hidden;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    transition: visibility 0.4s, right 0.7s;
+}
+
+div.wheel-colors-visible {right: 5%; visibility: visible;}
+
+div.wheel-colors input {
+    width: 100%;
+    height: 40px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+div.wheel-colors input::-webkit-color-swatch {
+    border: 1px solid black;
+}
+
+div.wheel-colors input::-moz-color-swatch {
+    border: 1px solid black;
+}
+
+h2.wheel-colors-header {
+    text-align: center;
+}
+
+button.wheel-colors-apply {
+    height: 60px;
+}
+
+@media screen and (max-width: 1000px), (max-height: 500px) {
+    div.wheel-front {
+        width: 90%;
+    }
+    div.wheel-zone {
+        width: 300px;
+        height: 300px;
+    }
+    div.wheel-element-default {
+        display: none;
+    }
+    button.wheel-spin {
+        width: 60px;
+        height: 60px;
+        font-size: 100%;
+    }
+    div.wheel-title-edit {
+        width: 80%;
+        grid-template-columns: auto;
+    }
+    div.wheel-title-edit label {
+        justify-self: left;
+    }
+    div.wheel-title-edit input {
+        width: 100%;
+    }
+    div.wheel-settings {
+        width: 90%;
+    }
+    div.wheel-options-edit {
+        grid-template-columns: auto auto;
+        gap: 1em;
+    }
+    div.wheel-options-edit label {
+        justify-self: right;        
+    }
+    div.wheel-options-buttons {
+        grid-column: 1 / span 2;
+    }
+    button.wheel-set, button.wheel-apply {
+        width: 120px;
+    }
+    div.wheel-misc button {
+        width: 150px;
+        font-size: 125%;
+    }
+    div.wheel-paste {
+        width: 90%;
+    }
+    div.wheel-paste-visible {
+        top: 8%;
+    }
+    div.wheel-colors {
+        width: 90%;
+        right: -100%;
+    }
+    div.wheel-colors-visible {right: 5%; visibility: visible;}
+}
+
+/* ^ koło fortuny */
 div.generator {
     min-height: 150vh;
     background: radial-gradient(rgb(167, 195, 219), rgb(3, 51, 95));
@@ -447,41 +945,15 @@ div.generator {
     opacity: 1;
     animation: none 1s 1;
 }
-@keyframes fade-in {
-    0%   {opacity: 0;}
-    100% {opacity: 1;}
-}
-@keyframes fade-out {
-    0%   {opacity: 1;}
-    100% {opacity: 0;}
-}
-
-div.return {
-    position: fixed;
-    top: 3%;
-    left: 3%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    cursor: pointer;
-    filter: drop-shadow(0 0 10px black);
-    z-index: 10;
-}
-
-div.return h2 {
-    margin-left: 8px;
-    margin-top: 4px;
-    color: white;
-}
 
 div.rng-front {
     margin-top: 7%;
     width: 80%;
     height: 700px;
     background: 
-    repeating-linear-gradient(310deg, rgba(128,128,128,0.4) 12%,
-   rgba(211,211,211,0.3) 32%, rgba(128,128,128,0.4) 40%,
-   rgba(128,128,128,0.4) 60%);
+    repeating-linear-gradient(310deg, rgba(128, 128, 128, 0.4) 12%,
+   rgba(211, 211, 211, 0.3) 32%, rgba(128, 128, 128, 0.4) 40%,
+   rgba(128, 128, 128, 0.4) 60%);
     border: 6px solid rgb(3, 51, 95);
     border-radius: 50px;
     display: grid;
@@ -639,7 +1111,7 @@ div.rng-option-text label span {
     font-size: 75%;
 }
 
-div.rng-option-text textarea {
+div.rng-option-text textarea, div.wheel-paste textarea {
     resize: none;
 }
 
@@ -687,7 +1159,6 @@ div.rng-disabled {
     div.generator {
         width: 100%;
     }
-    div.return {top: 1.5%;}
     div.rng-front {
         width: 90%;
         grid-template: 80px 60% / auto;
@@ -709,7 +1180,7 @@ div.rng-disabled {
         justify-self: left;
     }
     div.rng-title-edit input {
-        max-width: 85%;
+        width: 100%;
     }
     div.rng-options {
         width: 90%;
@@ -744,4 +1215,4 @@ div.rng-disabled {
 
 }
 
-/* ^ rng generator */
+/* ^ generator rng */
