@@ -13,8 +13,10 @@ const appcards = document.querySelectorAll("div.appcard");
 const app_buttons = document.querySelectorAll("div.appcard button");
 const app_return_btn = document.querySelector("div.return");
 const alert_box = document.querySelector("div.alert");
+const app_icons = document.querySelectorAll("div.loading-icons svg");
 const app_wheel = document.querySelector("div.wheel");
 const app_generator = document.querySelector("div.generator");
+const app_opener = document.querySelector("div.opener");
 const wheel_title = document.querySelector('input[name="wheel-title"]');
 const wheel_title_text = document.querySelector("h1.wheel-title");
 const wheel_elements = document.querySelector("div.wheel-elements");
@@ -46,6 +48,23 @@ const rng_apply_btn = document.querySelector("button.rng-apply");
 const rng_generate = document.querySelector("button.rng-generate");
 const rng_result = document.querySelector("p.rng-result-value");
 const rng_counter = document.querySelector("p.rng-counter");
+const opener_title = document.querySelector('input[name="opener-title"]');
+const opener_title_text = document.querySelector("h1.opener-title");
+const opener_num_of_options = document.querySelector('input[name="opener-options-number"]');
+const opener_set_btn = document.querySelector("button.opener-set");
+const opener_plus_btn = document.querySelector("button.opener-plus");
+const opener_minus_btn = document.querySelector("button.opener-minus");
+const opener_apply_btn = document.querySelector("button.opener-apply");
+const opener_files_btn = document.querySelector("button.opener-images");
+const opener_files_handler = document.querySelector('input[name="opener-images"]');
+const opener_labels_btn = document.querySelector("button.opener-edit-labels");
+const opener_options = document.querySelector("div.opener-options-zone");
+const opener_labels_block = document.querySelector("div.opener-labels");
+const opener_labels_apply_btn = document.querySelector("button.opener-labels-apply");
+const opener_labels_close_btn = document.querySelector("button.opener-labels-close");
+const opener_spinner = document.querySelector("div.opener-blocks");
+const opener_roll_btn = document.querySelector("button.opener-roll");
+const opener_result_block = document.querySelector("div.opener-result");
 let activator = body_height * 0.2;
 let app_value = 0;
 let wheel_colors = ["#a7c3db", "#06447e", "#43739c", "#3e82bd"];
@@ -61,6 +80,13 @@ let wheel_colors_inputs = document.querySelectorAll('input[name="wheel-color"]')
 // let wheel_style = "";
 let rng_value1, rng_value2, rng_stats = [0, 0];
 let rng_mode = 0;
+let opener_option_blocks = document.querySelectorAll("div.opener-option-block");
+let opener_files = "";
+let opener_index = 0;
+let opener_labels = document.querySelector('textarea[name="opener-labels-options"]');
+let opener_random = null;
+let opener_result = undefined;
+let opener_pointer = document.querySelector("div.opener-index");
 let rng_sound = new Audio('media/click.mp3');
 let wheel_result_sound = new Audio('media/wheel_result.mp3');
 // let wheel_spintick_sound = new Audio('media/wheel_spin.mp3');
@@ -88,11 +114,11 @@ document.addEventListener("visibilitychange", function() {
 
 //ustawienia
 settings_btn.addEventListener("click", function() {
-    settings_panel.classList.toggle("settings_visible");
+    settings_panel.classList.toggle("settings-visible");
 });
 
 function close_settings() {
-    settings_panel.classList.remove("settings_visible");
+    settings_panel.classList.remove("settings-visible");
 }
 
 settings_cross.addEventListener("click", close_settings);
@@ -100,6 +126,8 @@ frontpage.addEventListener("click", close_settings);
 app_generator.addEventListener("click", close_settings);
 app_wheel.addEventListener("click", close_settings);
 app_wheel.addEventListener("click", close_wheel_result);
+app_opener.addEventListener("click", close_settings);
+app_opener.addEventListener("click", close_opener_result);
 
 //alert
 function alert_info(text, color) {
@@ -129,6 +157,13 @@ app_buttons[1].addEventListener("click", () => {
     application_start(app_generator, 1);
 });
 
+menu_app[2].addEventListener("click", () => {
+    application_start(app_opener, 2);
+});
+app_buttons[2].addEventListener("click", () => {
+    application_start(app_opener, 2);
+});
+
 app_return_btn.addEventListener("click", () => {
     switch (app_value) {
         case 1:
@@ -136,6 +171,9 @@ app_return_btn.addEventListener("click", () => {
             break;
         case 2:
             application_end(app_generator);
+            break;
+        case 3:
+            application_end(app_opener);
             break;
         default:
             break;
@@ -146,10 +184,16 @@ function application_start(application, app_index) {
     frontpage.classList.add("hidden");
     appcards[app_index].style.scale = "1.2";
     menu.classList.add("hidden");
+    app_icons[app_index].style.display = "block";
+    app_icons[app_index].style.animationName = "fade-in";
     setTimeout(() => {
         application.style.display = "flex";
         application.style.animationName = "fade-in";
         appcards[app_index].style.scale = "1";
+        app_icons[app_index].style.animationName = "fade-out";
+        setTimeout(() => {
+            app_icons[app_index].style.display = "none";
+        }, 900);
         frontpage.style.display = "none";
         footer.style.display = "none";
         window.scrollTo(0, 0);
@@ -179,40 +223,55 @@ function application_end(application) {
     window.scrollTo(0, 0);
 }
 
-//koło fortuny
+//wspólne funkcje koła i openera
 wheel_set_btn.addEventListener("click", () => {
-    wheel_set_options(wheel_num_of_options, wheel_num_of_options.value);
+    wheel_set_options(wheel_num_of_options, wheel_num_of_options.value,
+    100, wheel_options);
 });
 
-function wheel_set_options(source, limit, text) {
-    if (limit > 100 || limit < 2) {
+opener_set_btn.addEventListener("click", () => {
+    wheel_set_options(opener_num_of_options, opener_num_of_options.value,
+    30, opener_options);
+});
+
+function wheel_set_options(source, limit, max_options, parent)  {
+    if (limit > max_options || limit < 2) {
         alert_info("Limit exceeded!", "alert-red");
-        if (source == wheel_num_of_options) {
-            wheel_num_of_options.value = 3;
-        }
+        source.value = 3;
         return;
     }
-    while (wheel_options.hasChildNodes()) {
-        wheel_options.removeChild(wheel_options.firstChild);
+    while (parent.hasChildNodes()) {
+        parent.removeChild(parent.firstChild);
     }
     for (let i = 0; i < limit; i++) {
-        let wheel_index = i + 1;
-        let option = document.createElement("input");
-        option.type = "text";
-        option.name = "wheel-option";
-        option.classList.add("wheel-option");
-        option.spellcheck = false;
-        option.placeholder = "Option " + wheel_index;
-        // option.value = text;
-        if (source == wheel_pasted) {
-            option.value = wheel_pasted[i];
+        if (parent == wheel_options) {
+            let wheel_index = i + 1;
+            let option = document.createElement("input");
+            option.type = "text";
+            option.name = "wheel-option";
+            option.classList.add("wheel-option");
+            option.spellcheck = false;
+            option.placeholder = "Option " + wheel_index;
+            if (source == wheel_pasted) {
+                option.value = wheel_pasted[i];
+            }
+            parent.appendChild(option);
+        } else if (parent == opener_options) {
+            let option = document.createElement("div");
+            option.classList.add("opener-option-block");
+            parent.appendChild(option);
+            opener_index = 0;
         }
-        wheel_options.appendChild(option);
     }
 }
 
+//koło fortuny
 wheel_plus_btn.addEventListener("click", () => {
-    let wheel_inputs = document.querySelectorAll('input[name="wheel-option"]');
+    wheel_inputs = document.querySelectorAll('input[name="wheel-option"]');
+    if (wheel_inputs.length == 100) {
+        alert_info("Can't add more options!", "alert-red");
+        return;
+    }
     let option = document.createElement("input");
     option.type = "text";
     option.name = "wheel-option";
@@ -373,7 +432,7 @@ wheel_paste_apply_btn.addEventListener("click", () => {
     wheel_pasted = document.querySelector('textarea[name="wheel-paste-options"]');
     wheel_pasted = wheel_pasted.value;
     wheel_pasted = wheel_pasted.split('\n');
-    wheel_set_options(wheel_pasted, wheel_pasted.length);
+    wheel_set_options(wheel_pasted, wheel_pasted.length, 100, wheel_options);
 });
 
 wheel_colors_btn.addEventListener("click", () => {
@@ -506,4 +565,265 @@ function rng_randomize() {
     }
 }
 
-// application_start(app_wheel, 0);
+//opener
+opener_plus_btn.addEventListener("click", opener_add);
+function opener_add() { 
+    opener_option_blocks = document.querySelectorAll("div.opener-option-block");
+    if (opener_option_blocks.length == 30) {
+        alert_info("Can't add more options!", "alert-red");
+        return;
+    }
+    let option = document.createElement("div");
+    option.classList.add("opener-option-block");
+    opener_options.appendChild(option);
+}
+
+opener_minus_btn.addEventListener("click", () => {
+    opener_option_blocks = document.querySelectorAll("div.opener-option-block");
+    if (opener_option_blocks.length > 2) {
+        opener_options.removeChild(opener_options.lastElementChild);
+        if (opener_index == 0) {
+            return;
+        }
+        // opener_index = opener_option_blocks.length - 1;
+        opener_index--;
+    } else {
+        alert_info("Can't delete more options!", "alert-red");
+        opener_index = 0;
+    }
+});
+
+opener_apply_btn.addEventListener("click", opener_apply);
+function opener_apply() {
+    alert_info("Successfully applied!", "alert-green");
+    opener_title_text.innerText = opener_title.value;
+    opener_generate();
+}
+function opener_generate() {
+    opener_option_blocks = document.querySelectorAll("div.opener-option-block");
+    while (opener_spinner.hasChildNodes()) {
+        opener_spinner.removeChild(opener_spinner.firstChild);
+    }
+    for (let i = 0; i < 51; i++) {
+        opener_random = Math.floor(Math.random() * opener_option_blocks.length);
+        let option = opener_option_blocks[opener_random].cloneNode(true);
+        if (i == 48) {
+            opener_result = opener_random;
+        }
+        option.classList.remove("opener-option-block");
+        option.classList.add("opener-block");
+        opener_spinner.appendChild(option);
+    }
+    let width = window.matchMedia("(max-width: 1000px)");
+    let height = window.matchMedia("max-height: 500px");
+    opener_spinner.style.width = "14020px";
+    if (width.matches || height.matches) {
+        opener_spinner.style.right = "221px";
+    } else {
+        opener_spinner.style.right = "50px";
+    }
+    // opener_object = document.querySelectorAll("div.opener-block");
+}
+
+opener_files_btn.addEventListener("click", () => {
+    if (opener_files_handler) {
+        opener_files_handler.click();
+    }
+});
+
+opener_files_handler.addEventListener("change", handleFiles);
+function handleFiles() {
+    let fileList = this.files;
+    opener_option_blocks = document.querySelectorAll("div.opener-option-block");
+    for (let i = 0; i < fileList.length; i++) {
+        if (!fileList[i].type.includes("image")) {
+            alert_info("Wrong file format!", "alert-red");
+            return;
+        }
+    }
+    opener_files = URL.createObjectURL(fileList[0]);
+    for (let index = 0; index < fileList.length; index++) {
+        opener_files = URL.createObjectURL(fileList[index]);
+        if (fileList.length > opener_option_blocks.length) {
+            while (fileList.length > (opener_option_blocks.length)) {
+                opener_plus_btn.click();
+                opener_option_blocks = document.querySelectorAll("div.opener-option-block");
+            }
+        }
+        if (opener_index == opener_option_blocks.length) {
+            opener_plus_btn.click();
+        }
+        opener_option_blocks = document.querySelectorAll("div.opener-option-block");
+        opener_option_blocks[opener_index].style.backgroundImage = "url(" + opener_files + ")";
+        opener_option_blocks[opener_index].style.backgroundRepeat = "no-repeat";
+        opener_option_blocks[opener_index].style.backgroundSize = "contain";
+        opener_option_blocks[opener_index].style.backgroundPosition = "center";
+        opener_index++;
+    }
+}
+
+opener_options.addEventListener("dragover", (e) => {
+    e.preventDefault();
+});
+
+opener_options.addEventListener("drop", (e) => {
+    e.preventDefault();
+    opener_option_blocks = document.querySelectorAll("div.opener-option-block");
+    let browser_check = navigator.userAgent; // wyjątek dla mozilli
+    if (browser_check.includes("Firefox")) {
+        alert_info("Feature not supported!", "alert-red");
+        return;
+    }
+    opener_files_handler.files = e.dataTransfer.files;
+    if (!opener_files_handler.files[0].type.includes("image")) {
+        alert_info("Wrong file format!", "alert-red");
+        return;
+    }
+    opener_files = URL.createObjectURL(opener_files_handler.files[0]);
+    if (opener_index == opener_option_blocks.length) {
+        opener_plus_btn.click();
+    }
+    opener_option_blocks = document.querySelectorAll("div.opener-option-block");
+    opener_option_blocks[opener_index].style.backgroundImage = "url(" + opener_files + ")";
+    opener_option_blocks[opener_index].style.backgroundRepeat = "no-repeat";
+    opener_option_blocks[opener_index].style.backgroundSize = "contain";
+    opener_option_blocks[opener_index].style.backgroundPosition = "center";
+    opener_index++;
+})
+
+app_opener.addEventListener("paste", (cache) => {
+    let pasted = cache.clipboardData.files[0];
+    if (pasted == undefined || !pasted.type.includes('image/')) {
+        alert_info("Wrong file format!", "alert-red");
+        return;
+    }
+    opener_option_blocks = document.querySelectorAll("div.opener-option-block");
+    if (opener_index == opener_option_blocks.length) {
+        opener_add();
+    }
+    if (pasted.type.startsWith('image/')) {
+        let reader = new FileReader();
+        reader.onload = () => {
+            opener_option_blocks = document.querySelectorAll("div.opener-option-block");
+            opener_option_blocks[opener_index].style.backgroundImage = "url(" + reader.result + ")";
+            opener_option_blocks[opener_index].style.backgroundRepeat = "no-repeat";
+            opener_option_blocks[opener_index].style.backgroundSize = "contain";
+            opener_option_blocks[opener_index].style.backgroundPosition = "center";
+            opener_index++;
+        }
+        reader.readAsDataURL(pasted);
+    }
+});
+
+opener_labels_btn.addEventListener("click", () => {
+    opener_labels_block.classList.toggle("opener-labels-visible");
+});
+
+opener_labels_close_btn.addEventListener("click", () => {
+    opener_labels_block.classList.remove("opener-labels-visible");
+});
+
+opener_labels_apply_btn.addEventListener("click", () => {
+    opener_labels = document.querySelector('textarea[name="opener-labels-options"]');
+    opener_labels = opener_labels.value;
+    opener_labels = opener_labels.split('\n');
+    opener_option_blocks = document.querySelectorAll("div.opener-option-block");
+    let opener_option_blocks_label = document.querySelectorAll("span.opener-option-text")
+    for (let i = 0; i < opener_option_blocks.length; i++) {
+        if (opener_option_blocks_label.length != 0 ) {
+            while (opener_option_blocks[i].hasChildNodes()) {
+                opener_option_blocks[i].removeChild(opener_option_blocks[i].firstChild);
+            }
+        }
+        opener_option_blocks[i].style.borderBottom = "30px solid rgb(3, 51, 95)";
+        let option = document.createElement("span");
+        if (opener_labels[i] != undefined) {
+            option.innerText = opener_labels[i];
+        } else {
+            option.innerText = "";
+        }
+        option.classList.add("opener-option-text");
+        opener_option_blocks[i].appendChild(option);
+    }
+});
+
+opener_roll_btn.addEventListener("click", opener_roll);
+function opener_roll() {
+    if (opener_random != null) {
+        console.log("KOSA");
+        opener_roll_btn.disabled = true;
+        opener_roll_btn.style.cursor = "not-allowed";
+        opener_roll_btn.innerText = "Rolling...";
+        opener_random = Math.floor(Math.random() * (120 - (-120) + 1) ) + (-120);
+        let width = window.matchMedia("(max-width: 1000px)");
+        let height = window.matchMedia("max-height: 500px");
+        if (width.matches || height.matches) {
+            opener_random = 12912 + opener_random;    
+        } else {
+            opener_random = 12740 + opener_random;
+        }
+        opener_spinner.style.setProperty('--spinShift', opener_random + 'px');
+        opener_spinner.style.animationName = "rolling";
+        opener_spinner.style.animationDuration = "7s";
+        opener_spinner.style.animationTimingFunction = "cubic-bezier(0.18, 0.89, 0.38, 1)";
+        opener_spinner.style.animationFillMode = "forwards";
+        opener_spinner.style.animationDelay = "0s";
+        // let opener_object = document.querySelectorAll("div.opener-block");
+        // let wheel_animation_frame = window.requestAnimationFrame;
+        // let blok_prawo = "";
+        // let wskaznik = "";
+        // wskaznik = getComputedStyle(opener_pointer).right;
+        // wskaznik = wskaznik.slice(0, wskaznik.length - 2);
+        // wheel_animation_frame(pisz);
+        // function pisz() {
+        //     blok_prawo = opener_object[47].getBoundingClientRect().left.toFixed();
+        //     // opener_object.forEach( (x) => {
+        //     //     x = x.getBoundingClientRect().left.toFixed();
+        //     //     if (x <= wskaznik) {
+        //     //         console.log(x + " moved");
+        //     //         wheel_spintick_sound.play();
+        //     //         return;
+        //     //     }
+        //     // })
+        //     console.log("blok: " + blok_prawo + " i wskaźnik: " + wskaznik);
+        //     if (blok_prawo <= wskaznik) {
+        //         wheel_spintick_sound.play();
+        //         // return;
+        //     }
+        //     if (blok_prawo == 0) return;
+        //     wheel_animation_frame(pisz);
+        // }
+        setTimeout(() => {
+            opener_spinner.style.animationName = "fade-out";
+            opener_spinner.style.animationTimingFunction = "linear";
+            opener_spinner.style.animationDuration = "0.4s";
+            opener_spinner.style.right = opener_random + "px";
+            opener_result_block.classList.add("opener-result-visible");
+            opener_option_blocks = document.querySelectorAll("div.opener-option-block");
+            let result = opener_option_blocks[opener_result].cloneNode(true);
+            result.classList.remove("opener-option-block");
+            result.classList.add("opener-block");
+            opener_result_block.innerText = "Result: ";
+            opener_result_block.appendChild(result);
+            if (sounds_control.checked == true) {
+                wheel_result_sound.play();
+            }
+            setTimeout(() => {
+                opener_spinner.style.animationName = "fade-in";
+                opener_spinner.style.right = "50px";
+                opener_generate();
+                opener_roll_btn.disabled = false;
+                opener_roll_btn.style.cursor = "pointer";
+                opener_roll_btn.innerText = "Roll";
+            }, 1000);
+        }, 7000);
+    } else {
+        console.log("nie wolno jemu jest");
+    }
+}
+
+function close_opener_result() {
+    opener_result_block.classList.remove("opener-result-visible");
+}
+
+// application_start(app_opener, 2);

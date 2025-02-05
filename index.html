@@ -213,6 +213,73 @@
       <button class="rng-apply">Apply</button>
     </div>
   </div>
+  <div class="opener">
+    <div class="opener-front">
+      <h1 class="opener-title">Title</h1>
+      <div class="opener-zone">
+        <div class="opener-blocks">
+          <div class="opener-block opener-block-default">Option 1</div>
+          <div class="opener-block opener-block-default">Option 2</div>
+          <div class="opener-block opener-block-default">Option 3</div>
+          <div class="opener-block opener-block-default">Option 4</div>
+        </div>
+        <div class="opener-index">
+          <svg class="opener-pointer"height="30" width="30">
+            <path d="M5 5 L25 5 L15 25 Z" style="fill:#03335f; stroke:#03335f;"/>
+          </svg>
+          <svg class="opener-pointer"height="30" width="30">
+            <path d="M5 5 L25 5 L15 25 Z" style="fill:#03335f; stroke:#03335f;"/>
+          </svg>
+        </div>
+      </div>
+      <button class="opener-roll">Roll</button>
+    </div>
+    <h1 class="opener-settings-title">Settings</h1>
+    <div class="opener-title-edit">
+      <label for="opener-title">Edit title: </label>
+      <input type="text" name="opener-title" id="opener-title" value="Title" size="50" spellcheck="false">
+    </div>
+    <div class="opener-settings">
+      <div class="opener-options-edit">
+        <label for="opener-options-number">Options: </label>
+        <input type="number" name="opener-options-number" id="opener-options-number" value="3" min="2" max="30">
+        <div class="opener-options-buttons">
+          <div class="opener-set-buttons">
+            <div class="opener-plus-minus">
+              <button class="opener-plus">+</button>
+              <button class="opener-minus">-</button>
+            </div>
+            <button class="opener-set">Set</button>
+          </div>
+          <button class="opener-apply">Apply</button>
+        </div>
+      </div>
+      <div class="opener-options">
+        <div class="opener-options-zone">
+          <div class="opener-option-block"></div>
+          <div class="opener-option-block"></div>
+          <div class="opener-option-block"></div>
+        </div>
+      </div>
+      <div class="opener-misc">
+        <input type="file" name="opener-images" id="opener-images" accept="image/*" multiple>
+        <button class="opener-images">Send images</button>
+        <button class="opener-edit-labels">Add labels</button>
+      </div>
+    </div>
+    <div class="opener-result"></div>
+    <div class="opener-labels">
+      <h2 class="opener-labels-header">Labels</h2>
+      <p class="opener-labels-info">Write your labels for each image here.
+        Every label must be written in new line.
+      </p>
+      <textarea name="opener-labels-options" cols="30" rows="10" spellcheck="false" placeholder="Write your labels here..."></textarea>
+      <div class="opener-labels-buttons">
+        <button class="opener-labels-apply">Apply</button>
+        <button class="opener-labels-close">Close</button>
+      </div>
+    </div>
+  </div>
   <div class="return">
     <svg fill="#ffffff" id="strzalka" width="40" height="40" viewBox="0 0 400 400">
       <polygon points="476.213,223.107 57.427,223.107 151.82,128.713 130.607,107.5 0,238.106 130.607,368.714 151.82,347.5 57.427,253.107 476.213,253.107 "></polygon>
@@ -220,6 +287,54 @@
     <h2>Back</h2>
   </div>
   <div class="alert"></div>
+  <div class="loading-icons">
+    <svg width="250" height="250" class="wheel">
+      <g>
+       <ellipse stroke="#ffffff" ry="110" rx="110" id="svg_18" cy="125" cx="125" stroke-width="4" fill="none"></ellipse>
+       <ellipse stroke="#ffffff" ry="20" rx="20" id="svg_15" cy="125" cx="125" stroke-width="4" fill="none"></ellipse>
+       <g transform="rotate(23 125 123.5)" id="svg_35">
+         <line stroke-width="3" id="svg_16" y2="110" x2="110" y1="47" x1="47" stroke="#ffffff" fill="none"></line>
+         <line stroke-width="3" id="svg_20" y2="110" x2="140" y1="47" x1="205" stroke="#ffffff" fill="none"></line>
+         <line stroke-width="3" id="svg_23" y2="105" x2="125" y1="14" x1="125" stroke="#ffffff" fill="none"></line>
+         <line stroke-width="3" id="svg_25" y2="125" x2="104" y1="125" x1="17" stroke="#ffffff" fill="none"></line>
+         <line stroke-width="3" id="svg_26" y2="125" x2="233" y1="125" x1="146" stroke="#ffffff" fill="none"></line>
+         <line stroke="#ffffff" stroke-width="3" id="svg_27" y2="233" x2="125" y1="146.22222" x1="125" fill="none"></line>
+         <line stroke="#ffffff" stroke-width="3" id="svg_30" y2="138" x2="110" y1="199.59259" x1="47" fill="none"></line>
+         <line stroke="#ffffff" stroke-width="3" id="svg_24" y2="138.14815" x2="140" y1="199.59259" x1="205" fill="none"></line>
+       </g>
+       <path transform="rotate(180 125.081 18.1342)" stroke="#ffffff" stroke-linejoin="round" id="svg_36" d="m109.49908,31.76842l15.58201,-27.26852l15.58201,27.26852l-31.16403,0z" stroke-width="3" fill="#03335f"></path>
+      </g>
+     </svg>
+    <svg width="250" height="250" class="rng">
+      <g>
+       <text class="svg-text" font-weight="bold" font-style="normal" transform="matrix(3.88479 0 0 3.88479 -329.64 -243.435)" font-family="'Archivo'" font-size="24" id="svg_1" y="103" x="110" fill="#ffffff">?</text>
+       <text class="svg-text" font-weight="bold" font-style="normal" transform="rotate(-30 70.2472 141.018) matrix(3.88479 0 0 3.88479 -329.64 -243.435)" font-family="'Archivo'" font-size="24" id="svg_6" y="107" x="96" fill="#ffffff">?</text>
+       <text class="svg-text" font-weight="bold" font-style="normal" transform="rotate(30 179.021 141.018) matrix(3.88479 0 0 3.88479 -329.64 -243.435)" font-family="'Archivo'" font-size="24" id="svg_7" y="107" x="124" fill="#ffffff">?</text>
+       <text class="svg-text" filter="url(#svg_blur)" font-weight="bold" transform="rotate(-33 88.2318 50.3569) matrix(3.88479 0 0 3.88479 -329.64 -243.435)" font-family="'Archivo'" font-size="12" id="svg_8" y="79.64437" x="104.09831" fill="#ffffff">?</text>
+       <text class="svg-text" filter="url(#svg_blur)" font-weight="bold" transform="rotate(50 208.232 45.9667) matrix(3.88479 0 0 3.88479 -329.64 -243.435)" font-family="'Archivo'" font-size="12" id="svg_9" y="78.51426" x="134.98801" fill="#ffffff">?</text>
+       <text class="svg-text" filter="url(#svg_blur)" font-weight="bold" transform="rotate(-20 172.134 216.698) matrix(3.88479 0 0 3.88479 -329.64 -243.435)" font-family="'Archivo'" font-size="12" id="svg_10" y="122.46302" x="125.69598" fill="#ffffff">?</text>
+       <text class="svg-text" filter="url(#svg_blur)" font-weight="bold" transform="rotate(39 33.5977 198.162) matrix(3.88479 0 0 3.88479 -329.64 -243.435)" font-family="'Archivo'" font-size="12" id="svg_11" y="117.69144" x="90.03471" fill="#ffffff">?</text>
+       <text class="svg-text" filter="url(#svg_blur)" font-weight="bold" transform="rotate(50 149.596 63.2837) matrix(3.88479 0 0 3.88479 -329.64 -243.435)" font-family="'Archivo'" font-size="8" id="svg_12" y="81.65346" x="121.04997" fill="#ffffff">?</text>
+       <text class="svg-text" filter="url(#svg_blur)" font-weight="bold" transform="rotate(-50 104.23 214.015) matrix(3.88479 0 0 3.88479 -329.64 -243.435)" font-family="'Archivo'" font-size="8" id="svg_13" y="120.45394" x="109.37216" fill="#ffffff">?</text>
+       <text class="svg-text" filter="url(#svg_blur)" font-weight="bold" transform="rotate(-64 39.3523 67.6739) matrix(3.88479 0 0 3.88479 -329.64 -243.435)" font-family="'Archivo'" font-size="8" id="svg_14" y="82.78357" x="92.67163" fill="#ffffff">?</text>
+       <text class="svg-text" filter="url(#svg_blur)" font-weight="bold" transform="rotate(43 218.377 187.674) matrix(3.88479 0 0 3.88479 -329.64 -243.435)" font-family="'Archivo'" font-size="8" id="svg_15" y="113.67327" x="138.75505" fill="#ffffff">?</text>
+      </g>
+      <defs>
+       <filter id="svg_blur">
+        <feGaussianBlur stdDeviation="0.5" in="SourceGraphic"></feGaussianBlur>
+       </filter>
+      </defs>
+     </svg>
+    <svg width="250" height="230" class="slider">
+      <g>
+       <rect fill="none" stroke-width="4" x="1" y="1" width="248" height="227" id="svg_35" rx="30" stroke="#ffffff"></rect>
+       <rect fill="none" x="-13" y="69" width="63.44459" height="73.34421" id="svg_46" rx="7" stroke-width="4" stroke="#ffffff"></rect>
+       <rect fill="none" x="69" y="69" width="113" height="73.34421" id="svg_36" rx="7" stroke="#ffffff" stroke-width="4"></rect>
+       <rect fill="none" x="200" y="69" width="63.44459" height="73.34421" id="svg_47" rx="7" stroke-width="4" stroke="#ffffff"></rect>
+       <rect fill="none" x="104.39286" y="184" width="41.21429" height="18.70136" id="svg_48" rx="7" stroke-width="3" stroke="#ffffff"></rect>
+      </g>
+    </svg>
+  </div>
   <footer>
     <p class="info"><em>Copyright 2025 © Piotr Cieśla</em></p>
     <a href="https://github.com/Piotress5">
