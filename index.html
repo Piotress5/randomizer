@@ -49,35 +49,62 @@
         <div class="appcard">
           <div class="appdesc">
             <h2>Wheel of Fortune</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Nam gravida, urna sed tincidunt mollis, odio risus facilisis metus,
               sit amet faucibus arcu nibh a lorem. Sed scelerisque ultrices massa
-              quis eleifend. Maecenas mi orci, suscipit a tellus ut, pretium dapibus odio.</p>
-              <button type="button">Spin</button>
+              quis eleifend. Maecenas mi orci, suscipit a tellus ut, pretium dapibus odio.</p> -->
+            <p>Spin the wheel and let it decide for you! You can set up to 100 
+               possibilities! Sit back and carefully watch what Fortune has prepared 
+               for you this time!
+            </p>
+            <button type="button">Spin</button>
           </div>
-          <div class="appshow"></div>
+          <div class="appshow">
+            <div class="appshow-container">
+              <svg class="appshow-wheel-pointer" height="30" width="30">
+                <path d="M5 5 L25 5 L15 25 Z" style="fill:#03335f; stroke:#03335f;"></path>
+              </svg>
+              <div class="appshow-wheel"></div>
+            </div>
+          </div>
         </div>
         <div class="appcard">
           <div class="appdesc">
             <h2>RNG</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Nam gravida, urna sed tincidunt mollis, odio risus facilisis metus,
-              sit amet faucibus arcu nibh a lorem. Sed scelerisque ultrices massa
-              quis eleifend. Maecenas mi orci, suscipit a tellus ut, pretium dapibus odio.</p>
-              <button type="button">Generate</button>
+            <p>Whether it's choosing in a hurry, out of boredom or just for the sake 
+              of curiosity, RNG is a perfect solution for any scenario! Get your answer 
+              instantly, without the necessary of pointless contemplation for hours.
+            </p>
+            <button type="button">Generate</button>
           </div>
-          <div class="appshow"></div>
+          <div class="appshow">
+            <div class="appshow-container">
+              <svg width="150" height="150" class="appshow-rng">
+                <text class="svg-text" fill="#ffffff" x="100" y="86" id="svg_1" font-size="16" font-family="'Archivo'" transform="rotate(0.1) matrix(3.88479 0 0 3.88479 -329.64 -243.435)" font-style="normal" font-weight="bold">?</text>
+                <text class="svg-text" fill="#ffffff" x="89" y="90" id="svg_6" font-size="16" font-family="'Archivo'" transform="rotate(-30 34.0708 86.5619) matrix(3.88479 0 0 3.88479 -329.64 -243.435)" font-style="normal" font-weight="bold">?</text>
+                <text class="svg-text" fill="#ffffff" x="111" y="90" id="svg_7" font-size="16" font-family="'Archivo'" transform="rotate(30 119.536 86.5619) matrix(3.88479 0 0 3.88479 -329.64 -243.435)" font-style="normal" font-weight="bold">?</text>
+              </svg>
+            </div>
+          </div>
         </div>
         <div class="appcard">
           <div class="appdesc">
             <h2>Opener</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Nam gravida, urna sed tincidunt mollis, odio risus facilisis metus,
-              sit amet faucibus arcu nibh a lorem. Sed scelerisque ultrices massa
-              quis eleifend. Maecenas mi orci, suscipit a tellus ut, pretium dapibus odio.</p>
-              <button type="button">Open</button>
+            <p>Words and numbers are not enough for you? Send your images and roll 
+              Opener, if you want something more than just simple values! Pass in 
+              up to 30 unique graphics and let the luck be with you!
+            </p>
+            <button type="button">Roll</button>
           </div>
-          <div class="appshow"></div>
+          <div class="appshow">
+            <div class="appshow-container">
+              <div class="appshow-opener">
+                <div class="appshow-opener-block"></div>
+                <div class="appshow-opener-block"></div>
+                <div class="appshow-opener-block"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -88,7 +115,7 @@
     </svg>
     <h2>Main settings</h2>
     <div class="clickables">
-      <label for="animations">Animations: </label>
+      <label for="animations">Transitions: </label>
       <input type="checkbox" name="animations" id="animations" checked>
       <label for="sounds">Sounds: </label>
       <input type="checkbox" name="sounds" id="sounds" checked>
@@ -150,7 +177,7 @@
       <p class="wheel-paste-info">Paste text of your options here. Remember to write only one
         option per each line.
       </p>
-      <textarea name="wheel-paste-options" cols="30" rows="10" spellcheck="false" placeholder="Write your options here..."></textarea>
+      <textarea name="wheel-paste-options" id="wheel-paste-options" cols="30" rows="10" spellcheck="false" placeholder="Write your options here..."></textarea>
       <div class="wheel-paste-buttons">
         <button class="wheel-paste-apply">Apply</button>
         <button class="wheel-paste-close">Close</button>
@@ -273,7 +300,7 @@
       <p class="opener-labels-info">Write your labels for each image here.
         Every label must be written in new line.
       </p>
-      <textarea name="opener-labels-options" cols="30" rows="10" spellcheck="false" placeholder="Write your labels here..."></textarea>
+      <textarea name="opener-labels-options" id="opener-labels-options" cols="30" rows="10" spellcheck="false" placeholder="Write your labels here..."></textarea>
       <div class="opener-labels-buttons">
         <button class="opener-labels-apply">Apply</button>
         <button class="opener-labels-close">Close</button>
@@ -304,7 +331,7 @@
        </g>
        <path transform="rotate(180 125.081 18.1342)" stroke="#ffffff" stroke-linejoin="round" id="svg_36" d="m109.49908,31.76842l15.58201,-27.26852l15.58201,27.26852l-31.16403,0z" stroke-width="3" fill="#03335f"></path>
       </g>
-     </svg>
+    </svg>
     <svg width="250" height="250" class="rng">
       <g>
        <text class="svg-text" font-weight="bold" font-style="normal" transform="matrix(3.88479 0 0 3.88479 -329.64 -243.435)" font-family="'Archivo'" font-size="24" id="svg_1" y="103" x="110" fill="#ffffff">?</text>
@@ -324,7 +351,7 @@
         <feGaussianBlur stdDeviation="0.5" in="SourceGraphic"></feGaussianBlur>
        </filter>
       </defs>
-     </svg>
+    </svg>
     <svg width="250" height="230" class="slider">
       <g>
        <rect fill="none" stroke-width="4" x="1" y="1" width="248" height="227" id="svg_35" rx="30" stroke="#ffffff"></rect>
@@ -337,9 +364,11 @@
   </div>
   <footer>
     <p class="info"><em>Copyright 2025 © Piotr Cieśla</em></p>
-    <a href="https://github.com/Piotress5">
-      <img src="img/github-mark-white.png" alt="github">
-    </a>
+    <div class="logo">
+      <a href="https://github.com/Piotress5">
+        <img src="img/github-mark-white.png" alt="github">
+      </a>
+    </div>
   </footer>
 </body>
 </html>

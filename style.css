@@ -27,7 +27,7 @@ nav {
     background: rgba(3, 51, 95, 0.2);
     color: white;
     /* box-shadow: 0px 2px 20px black; */
-    transition: 0.3s;
+    transition: var(--navTrans, 0.3s);
 }
 
 nav.scrolled {
@@ -46,7 +46,7 @@ div#logo {
 
 div#logo svg {
     filter: drop-shadow(0 0 5px black);
-    transition: 0.3s;
+    transition: var(--logoTrans, 0.3s);
 }
 
 div#logo svg:hover {
@@ -71,7 +71,7 @@ li.application {
     display: flex;
     align-content: center;
     flex-wrap: wrap;
-    transition: border 0.3s;
+    transition: border var(--appLink, 0.3s);
 }
 
 li.application:hover {
@@ -85,7 +85,7 @@ li.settings {
 
 li.settings svg {
     filter: drop-shadow(0 0 5px black);
-    transition: 0.3s;
+    transition: var(--settingsBtn, 0.3s);
 }
 
 li.settings svg:hover {
@@ -122,7 +122,7 @@ footer img {
     border-radius: 50%;
     background: radial-gradient(closest-corner at 50% 55%,
     transparent 20px, #3d3dff 10px);
-    transition: 0.5s;
+    transition: var(--footerImgHover, 0.5s);
 }
 
 footer img:hover {
@@ -154,7 +154,6 @@ section {
 }
 
 section.hidden {
-    /* scale: 1.1; */
     opacity: 0;
     overflow: hidden;
     transition: 1s;
@@ -163,7 +162,6 @@ section.hidden {
 div.frontpage {
     height: 100vh;
     width: 100%;
-    /* background: linear-gradient(to bottom, black 20%, transparent 70%, black); */
     position: relative;
 }
 
@@ -227,9 +225,8 @@ div.applications {
 div.appcard {
     width: 65%;
     height: 58vh;
-    /* background: white; */
-    /* background: rgb(167, 195, 219); */
-    background: linear-gradient(to right, rgb(167, 195, 219) 55%, white 70%);
+    background: linear-gradient(to right, rgb(167, 195, 219) 60%,
+    rgb(37, 122, 196) 60%);
     border-radius: 15px;
     display: grid;
     grid-template-columns: 60% 40%;
@@ -238,7 +235,6 @@ div.appcard {
 }
 
 div.appdesc {
-    /* background: gray; */
     padding: 5vw;
 }
 
@@ -271,8 +267,10 @@ div.appdesc > button:active {
 }
 
 div.appshow {
-    /* background: yellow; */
-    border-left: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 div.loading-icons {
@@ -296,6 +294,96 @@ div.loading-icons svg {
     font-family: 'Archivo';
 }
 
+div.appshow-container {
+    width: 250px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    filter: drop-shadow(0 0 5px black);
+}
+
+div.appshow-wheel {
+    width: 100%;
+    height: 100%;
+    background: repeating-conic-gradient(rgb(167, 195, 219) 22.5deg,
+    rgb(167, 195, 219) 67.5deg, rgb(6, 68, 126) 67.5deg, rgb(6, 68, 126) 112.5deg,
+    rgb(67, 115, 156) 112.5deg, rgb(67, 115, 156) 157.5deg,
+    rgb(62, 130, 189) 157.5deg, rgb(62, 130, 189) 202.5deg);
+    border: 4px solid rgb(3, 51, 95);
+    border-radius: 50%;
+    position: relative;
+    animation: rotation 9s infinite linear;
+}
+
+div.appshow-wheel::after {
+    content: '';
+    width: 30px;
+    height: 30px;
+    background: rgb(3, 51, 95);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+svg.appshow-wheel-pointer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+svg.appshow-rng {
+    animation: scaling 3s infinite linear;
+}
+@keyframes scaling {
+    0%   {scale: 1.4;}
+    50%  {scale: 1.7;}
+    100% {scale: 1.4;}
+}
+
+div.appshow-opener {
+    width: 400px;
+    height: 100%;
+    position: relative;
+    background: radial-gradient(rgb(167, 195, 219), rgb(6, 68, 126));
+    border: 3px solid rgb(3, 51, 95);
+    border-radius: 40px;
+    overflow: hidden;
+}
+
+div.appshow-opener-block {
+    width: 110px;
+    height: 80px;
+    background: rgb(167, 195, 219);
+    border: 2px solid rgb(3, 51, 95);
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 0%;
+}
+
+div.appshow-opener-block:nth-child(1) {
+    transform: translate(-75px, -50%);
+    animation: small-rolling 8s infinite linear -5.33s;
+}
+div.appshow-opener-block:nth-child(2) {
+    transform: translate(65px, -50%);
+    animation: small-rolling 8s infinite linear -2.66s;
+}
+div.appshow-opener-block:nth-child(3) {
+    transform: translate(205px, -50%);
+    animation: small-rolling 8s infinite linear -0s;
+}
+@keyframes small-rolling {
+    0%   {transform: translate(300px, -50%);}
+    100% {transform: translate(-140px, -50%);}
+}
+
 @media screen and (max-width: 1000px), (max-height: 500px) {
     div.fronttext h1 {
         font-size: 45px;
@@ -308,7 +396,9 @@ div.loading-icons svg {
         /* height: 75vh; */
         grid-template-columns: auto;
         grid-template-rows: 60% 40%;
-        background: linear-gradient(to bottom, rgb(167, 195, 219) 55%, white 70%);
+        /* background: linear-gradient(to bottom, rgb(167, 195, 219) 55%, white 70%); */
+        background: linear-gradient(to bottom, rgb(167, 195, 219) 60%,
+        rgb(37, 122, 196) 60%);
         position: relative;
     }
     div.appdesc h2 {
@@ -331,10 +421,33 @@ div.loading-icons svg {
         transform: translate(-50%, 0);
     }
     div.appshow {
-        /* background: yellow; */
-        border-left: none;
-        border-top: 1px solid black;
-        height: 40%;
+        height: 100%;
+    }
+    div.appshow-container {
+        width: 150px;
+        height: 150px;
+    }
+    @keyframes scaling {
+        0%   {scale: 1.2;}
+        50%  {scale: 1.5;}
+        100% {scale: 1.2;}
+    }
+    div.appshow-opener-block {
+        width: 80px;
+        height: 60px;
+    }
+    div.appshow-opener-block:nth-child(1) {
+        animation: small-rolling 6s infinite linear -4s;
+    }
+    div.appshow-opener-block:nth-child(2) {
+        animation: small-rolling 6s infinite linear -2s;
+    }
+    div.appshow-opener-block:nth-child(3) {
+        animation: small-rolling 6s infinite linear -0s;
+    }
+    @keyframes small-rolling {
+        0%   {transform: translate(170px, -50%);}
+        100% {transform: translate(-140px, -50%);}
     }
 }
 
@@ -349,7 +462,7 @@ div.settingspage {
     border-right: 2px solid black;
     color: white;
     z-index: 10;
-    transition: 0.4s;
+    transition: var(--settingsPanel, 0.4s);
 }
 
 div.settings-visible {
@@ -468,7 +581,7 @@ div.alert {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0s, top 0.7s;
+    transition: all 0s, top var(--topTrans, 0.7s);
 }
 
 div.alert-red {
@@ -485,7 +598,7 @@ div.alert-green {
 
 div.alert-visible {top: 5%;}
 
-div.application_end {
+div.application-end {
     position: absolute;
     top: 0;
     left: 0;
@@ -523,7 +636,7 @@ div.wheel-result, div.opener-result {
     justify-content: center;
     align-items: center;
     overflow: auto;
-    transition: all 0s, visibility 0.4s, top 0.7s;
+    transition: all 0s, visibility 0.4s, top var(--topTrans, 0.7s);
 }
 
 div.wheel-result-visible, div.opener-result-visible {top: 20%; visibility: visible;}
@@ -823,7 +936,7 @@ div.wheel-paste {
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
-    transition: visibility 0.4s, top 0.7s;
+    transition: visibility 0.4s, top var(--topTrans, 0.7s);
 }
 
 div.wheel-paste-visible {top: 5%; visibility: visible;}
@@ -870,7 +983,7 @@ div.wheel-colors {
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
-    transition: visibility 0.4s, right 0.7s;
+    transition: visibility 0.4s, right var(--rightTrans, 0.7s);
 }
 
 div.wheel-colors-visible {right: 5%; visibility: visible;}
@@ -1137,7 +1250,7 @@ div.rng-option-text label span {
     font-size: 75%;
 }
 
-div.rng-option-text textarea, div.wheel-paste textarea {
+textarea#rng-texts, textarea#wheel-paste-options, textarea#opener-labels-options {
     resize: none;
 }
 
@@ -1322,22 +1435,26 @@ div.opener-block-default {
     position: absolute;
     top: 50%;
     left: 0;
-    transform: translate(-270px, -50%);
+    /* transform: translate(-270px, -50%); */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 div.opener-block-default:nth-child(1) {
+    transform: translate(-108px, -50%);
     animation: rolling-default 10s infinite linear -7.5s;
 }
 div.opener-block-default:nth-child(2) {
+    transform: translate(223px, -50%);
     animation: rolling-default 10s infinite linear -5s;
 }
 div.opener-block-default:nth-child(3) {
+    transform: translate(551px, -50%);
     animation: rolling-default 10s infinite linear -2.5s;
 }
 div.opener-block-default:nth-child(4) {
+    transform: translate(-270px, -50%);
     animation: rolling-default 10s infinite linear 0s;
 }
 @keyframes rolling-default {
@@ -1513,7 +1630,7 @@ div.opener-option-block {
     border: 3px solid rgb(3, 51, 95);
     border-radius: 10px;
     position: relative;
-    transition: 0.4s;
+    /* transition: 0.4s; */
 }
 
 span.opener-option-text {
@@ -1574,7 +1691,7 @@ div.opener-labels {
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
-    transition: visibility 0.4s, top 0.7s;
+    transition: visibility 0.4s, top var(--topTrans, 0.7s);
 }
 
 div.opener-labels-visible {top: 5%; visibility: visible;}
