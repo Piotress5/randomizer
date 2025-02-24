@@ -82,9 +82,6 @@ let wheel_result = "";
 let wheel_default = document.querySelectorAll("div.wheel-element-default");
 let wheel_pasted = document.querySelector('textarea[name="wheel-paste-options"]');
 let wheel_colors_inputs = document.querySelectorAll('input[name="wheel-color"]');
-// let wheel_animation_frame = window.requestAnimationFrame;
-// let wheel_temp1, wheel_temp2;
-// let wheel_style = "";
 let rng_value1, rng_value2, rng_stats = [0, 0];
 let rng_mode = 0;
 let opener_option_blocks = document.querySelectorAll("div.opener-option-block");
@@ -95,9 +92,11 @@ let opener_random = null;
 let opener_result = undefined;
 let opener_pointer = document.querySelector("div.opener-index");
 let opener_checker = "";
+let counter = [0, 0, 0];
 let rng_sound = new Audio('media/click.mp3');
-let wheel_result_sound = new Audio('media/wheel_result.mp3');
-// let wheel_spintick_sound = new Audio('media/wheel_spin.mp3');
+let result_sound = new Audio('media/result.mp3');
+let ding_sound = new Audio('media/ding.mp3');
+let proceed_sound = new Audio('media/proceeding.mp3');
 
 //zmiana menu
 window.addEventListener("scroll", function() {
@@ -123,7 +122,6 @@ document.addEventListener("visibilitychange", function() {
 //sterowanie animacjami strony
 animation_control.addEventListener("click", () => {
     if (animation_control.checked == false) {
-        // home_video.src = "";
         home_video.src = "media/background1.mp4";
         home_video.pause();
         home_btn.style.setProperty('--logoTrans', '0s');
@@ -219,6 +217,40 @@ function disable_btn(caller) {
     }, 2300);
 }
 
+//----------------
+app_wheel_show.addEventListener("click", () => {
+    counter[0]++;
+    if (counter[0] == 7) {
+        check();
+    }
+});
+app_rng_show.addEventListener("click", () => {
+    counter[1]++;
+    if (counter[1] == 7) {
+        check();
+    }
+});
+app_opener_show.forEach(block => {
+    block.addEventListener("click", () => {
+        counter[2]++;
+        if (counter[2] == 7) {
+            check();
+        }
+    });
+});
+function check() {
+    if (counter[0] == 7 && counter[1] == 7 && counter[2] == 7) {
+        if (sounds_control.checked == true) {
+            result_sound.play();
+        }
+        alert_info("JACKPOT", "alert-green");
+    } else {
+        if (sounds_control.checked == true) {
+            ding_sound.play();
+        }
+    }
+}
+
 //przejście pomiędzy aplikacjami
 menu_app[0].addEventListener("click", () => {
     application_start(app_wheel, 0);
@@ -259,30 +291,18 @@ app_return_btn.addEventListener("click", () => {
 
 function application_start(application, app_index) {
     if (animation_control.checked == false) {
-        // frontpage.classList.add("hidden");
-        // appcards[app_index].style.scale = "1.2";
         menu.classList.add("hidden");
         menu.style.setProperty('--navTrans', '0s');
-        // app_icons[app_index].style.display = "block";
-        // app_icons[app_index].style.animationName = "fade-in";
-        // setTimeout(() => {
-            application.style.display = "flex";
-            application.style.animationName = "none";
-            // appcards[app_index].style.scale = "1";
-            // app_icons[app_index].style.animationName = "fade-out";
-            // setTimeout(() => {
-            //     app_icons[app_index].style.display = "none";
-            // }, 900);
-            frontpage.style.display = "none";
-            footer.style.display = "none";
-            window.scrollTo(0, 0);
-            app_return_btn.style.display = "flex";
-            app_return_btn.style.opacity = 1;
-            app_return_btn.style.animationName = "none";
-            // app_return_btn.style.animationName = "return-appear";
-            settings_btn.style.animationName = "none";
-            settings_btn.classList.add("app");
-        // }, 500);
+        application.style.display = "flex";
+        application.style.animationName = "none";
+        frontpage.style.display = "none";
+        footer.style.display = "none";
+        window.scrollTo(0, 0);
+        app_return_btn.style.display = "flex";
+        app_return_btn.style.opacity = 1;
+        app_return_btn.style.animationName = "none";
+        settings_btn.style.animationName = "none";
+        settings_btn.classList.add("app");
     } else {
         frontpage.classList.add("hidden");
         appcards[app_index].style.scale = "1.2";
@@ -290,6 +310,7 @@ function application_start(application, app_index) {
         menu.style.setProperty('--navTrans', '0.3s');
         app_icons[app_index].style.display = "block";
         app_icons[app_index].style.animationName = "fade-in";
+        footer.style.display = "none";
         setTimeout(() => {
             application.style.display = "flex";
             application.style.animationName = "fade-in";
@@ -299,7 +320,6 @@ function application_start(application, app_index) {
                 app_icons[app_index].style.display = "none";
             }, 900);
             frontpage.style.display = "none";
-            footer.style.display = "none";
             window.scrollTo(0, 0);
             app_return_btn.style.display = "flex";
             app_return_btn.style.opacity = 1;
@@ -485,7 +505,6 @@ function wheel_spin() {
         rng_value2 += rng_value1 + 3600;
         wheel_elements.animate([
             {transform: 'rotate(0deg)'},
-            // {transform: 'rotate(3600deg)'}
             {transform: 'rotate(' + rng_value2 + 'deg)'}
         ], {
             duration: 8000,
@@ -493,29 +512,16 @@ function wheel_spin() {
             iterations: 1,
             easing: 'cubic-bezier(0.42, 0, 0.04, 1)'
         });
-        // wheel_animation_frame = window.requestAnimationFrame;
-        // wheel_animation_frame(wheel_update);   
-        // function wheel_update() {
-        //     wheel_style = getComputedStyle(wheel_elements).transform;
-        //     wheel_temp1 = wheel_style.slice(7, 11);
-        //     wheel_temp2 = wheel_style.slice(7, 11);
-        //     // tymczasowa.includes("0.99");
-        //     // console.log("Jeden: " + tymczasowa + " i dwa: " + tymczasowa2);
-        //     if (wheel_temp1 == "0.99" || wheel_temp2 == "-0.5") {
-        //         wheel_spintick_sound.play();
-        //         // wheel_play();
-        //     } 
-        //     // else if (wheel_temp2 == "-0.5") {
-        //     //     wheel_spintick_sound.play();
-        //     //     // wheel_play();
-        //     // }
-        //     wheel_animation_frame(wheel_update);
-        // }
         wheel_result = Math.abs((rng_value1 / wheel_result) - wheel_inputs.length);
         if (wheel_result == 0) {
             wheel_result_block.innerText = "Result:\n" + wheel_inputs[wheel_inputs.length - 1].value;
         } else {
             wheel_result_block.innerText = "Result:\n" + wheel_inputs[wheel_result - 1].value;
+        }
+        if (sounds_control.checked == true) {
+            setTimeout(() => {
+                proceed_sound.play();
+            }, 1500);
         }
         setTimeout(() => {
             wheel_spin_btn.style.animationName = "text-color-in";
@@ -523,24 +529,11 @@ function wheel_spin() {
             wheel_spin_btn.style.cursor = "pointer";
             wheel_result_block.classList.add("wheel-result-visible");
             if (sounds_control.checked == true) {
-                wheel_result_sound.play();
+                result_sound.play();
             }
-            // wheel_temp1 = "";
-            // wheel_temp2 = "";
         }, 8000);
     }
 }
-
-// function wheel_play() {
-//     if (sounds_control.checked == false) {
-//         return;
-//     }
-//     // wheel_spintick_sound.preload = 'auto';
-//     // wheel_spintick_sound.load();
-//     let click = wheel_spintick_sound.cloneNode();
-//     click.volume = 0.3;
-//     click.play();
-// }
 
 function close_wheel_result() {
     wheel_result_block.classList.remove("wheel-result-visible");
@@ -719,7 +712,6 @@ opener_minus_btn.addEventListener("click", () => {
         if (opener_index == 0) {
             return;
         }
-        // opener_index = opener_option_blocks.length - 1;
         opener_index--;
     } else {
         alert_info("Can't delete more options!", "alert-red");
@@ -758,7 +750,6 @@ function opener_generate() {
     } else {
         opener_spinner.style.right = "50px";
     }
-    // opener_object = document.querySelectorAll("div.opener-block");
 }
 
 opener_files_btn.addEventListener("click", () => {
@@ -891,7 +882,6 @@ opener_labels_apply_btn.addEventListener("click", () => {
 opener_roll_btn.addEventListener("click", opener_roll);
 function opener_roll() {
     if (opener_random != null) {
-        console.log("KOSA");
         opener_roll_btn.disabled = true;
         opener_roll_btn.style.cursor = "not-allowed";
         opener_roll_btn.innerText = "Rolling...";
@@ -909,31 +899,9 @@ function opener_roll() {
         opener_spinner.style.animationTimingFunction = "cubic-bezier(0.18, 0.89, 0.38, 1)";
         opener_spinner.style.animationFillMode = "forwards";
         opener_spinner.style.animationDelay = "0s";
-        // let opener_object = document.querySelectorAll("div.opener-block");
-        // let wheel_animation_frame = window.requestAnimationFrame;
-        // let blok_prawo = "";
-        // let wskaznik = "";
-        // wskaznik = getComputedStyle(opener_pointer).right;
-        // wskaznik = wskaznik.slice(0, wskaznik.length - 2);
-        // wheel_animation_frame(pisz);
-        // function pisz() {
-        //     blok_prawo = opener_object[47].getBoundingClientRect().left.toFixed();
-        //     // opener_object.forEach( (x) => {
-        //     //     x = x.getBoundingClientRect().left.toFixed();
-        //     //     if (x <= wskaznik) {
-        //     //         console.log(x + " moved");
-        //     //         wheel_spintick_sound.play();
-        //     //         return;
-        //     //     }
-        //     // })
-        //     console.log("blok: " + blok_prawo + " i wskaźnik: " + wskaznik);
-        //     if (blok_prawo <= wskaznik) {
-        //         wheel_spintick_sound.play();
-        //         // return;
-        //     }
-        //     if (blok_prawo == 0) return;
-        //     wheel_animation_frame(pisz);
-        // }
+        if (sounds_control.checked == true) {
+            proceed_sound.play();
+        }
         setTimeout(() => {
             opener_spinner.style.animationName = "fade-out";
             opener_spinner.style.animationTimingFunction = "linear";
@@ -947,7 +915,7 @@ function opener_roll() {
             opener_result_block.innerText = "Result: ";
             opener_result_block.appendChild(result);
             if (sounds_control.checked == true) {
-                wheel_result_sound.play();
+                result_sound.play();
             }
             setTimeout(() => {
                 opener_spinner.style.animationName = "fade-in";
@@ -958,8 +926,6 @@ function opener_roll() {
                 opener_roll_btn.innerText = "Roll";
             }, 1000);
         }, 7000);
-    } else {
-        console.log("nie wolno jemu jest");
     }
 }
 
