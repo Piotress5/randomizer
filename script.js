@@ -83,7 +83,7 @@ let wheel_default = document.querySelectorAll("div.wheel-element-default");
 let wheel_pasted = document.querySelector('textarea[name="wheel-paste-options"]');
 let wheel_colors_inputs = document.querySelectorAll('input[name="wheel-color"]');
 let rng_value1, rng_value2, rng_stats = [0, 0];
-let rng_mode = 0;
+let rng_mode = 1;
 let opener_option_blocks = document.querySelectorAll("div.opener-option-block");
 let opener_files = "";
 let opener_index = 0;
@@ -532,6 +532,8 @@ function wheel_spin() {
                 result_sound.play();
             }
         }, 8000);
+    } else {
+        wheel_options.scrollIntoView({behavior: "smooth"});
     }
 }
 
@@ -926,6 +928,8 @@ function opener_roll() {
                 opener_roll_btn.innerText = "Roll";
             }, 1000);
         }, 7000);
+    } else {
+        opener_options.scrollIntoView({behavior: "smooth"});
     }
 }
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Randomizer">
+  <meta name="description" content="Can't make decision? Use Randomizer - 3 in 1 application - and let it decide for you!">
   <meta name="author" content="Piotress5">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
@@ -205,14 +205,14 @@
     <div class="rng-options">
       <div class="rng-option rng-option-label">
         <label for="if-number">Number: </label>
-        <input type="radio" name="generated-value" id="if-number">
+        <input type="radio" name="generated-value" id="if-number" checked>
       </div>
-      <div class="rng-option rng-option-number rng-disabled">
+      <div class="rng-option rng-option-number">
         <span>Range: </span>
         <label for="rng-number-min">From: </label>
-        <input type="number" name="rng-number-min" id="rng-number-min" value="0" disabled>
+        <input type="number" name="rng-number-min" id="rng-number-min" value="1">
         <label for="rng-number-max">To: </label>
-        <input type="number" name="rng-number-max" id="rng-number-max" value="0" disabled>
+        <input type="number" name="rng-number-max" id="rng-number-max" value="10">
       </div>
       <div class="rng-option rng-option-label">
         <label for="if-text">Text: </label>

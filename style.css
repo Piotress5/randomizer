@@ -146,7 +146,7 @@ footer img:hover {
 
 /* ^ główne ustawienia */
 section {
-    height: 440vh;
+    height: 450vh;
     position: relative;
 }
 
@@ -206,7 +206,7 @@ div.choose > h1 {
 
 div.applications {
     width: 100%;
-    height: 270vh;
+    height: calc(280vh + 1px);
     background-color: #cccccc;
     background-image: url("img/background2.jpg");
     background-attachment: fixed;
@@ -219,8 +219,8 @@ div.applications {
 }
 
 div.appcard {
-    width: 65%;
-    height: 58vh;
+    width: 70%;
+    height: 63vh;
     background: linear-gradient(to right, rgb(167, 195, 219) 60%,
     rgb(37, 122, 196) 60%);
     border-radius: 15px;
@@ -389,6 +389,7 @@ div.appshow-opener-block:nth-child(3) {
     }
     div.appcard {
         width: 75%;
+        height: 75vh;
         grid-template-columns: auto;
         grid-template-rows: 60% 40%;
         background: linear-gradient(to bottom, rgb(167, 195, 219) 60%,
@@ -452,6 +453,7 @@ div.settingspage {
     background: rgba(128, 128, 128, 0.5);
     border-right: 2px solid black;
     color: white;
+    backdrop-filter: blur(10px);
     z-index: 10;
     transition: var(--settingsPanel, 0.4s);
 }
@@ -481,7 +483,7 @@ div.settingspage h2 {
 }
 
 div.clickables {
-    width: 70%;
+    width: 75%;
     height: 20%;
     position: absolute;
     top: 30%;
@@ -517,6 +519,10 @@ div.clickables input {
     div.settingspage h2 {
         width: 100%;
         text-align: center;
+    }
+    div.clickables {
+        width: 85%;
+        grid-template-columns: 60% 40%;
     }
 }
 
@@ -628,8 +634,8 @@ div.wheel-plus-minus, div.opener-plus-minus {
 }
 
 button.wheel-plus, button.wheel-minus, button.opener-plus, button.opener-minus {
-    width: 40px;
-    height: 40px;
+    max-width: 40px;
+    max-height: 40px;
 }
 
 button.wheel-set, button.wheel-apply, button.opener-set, button.opener-apply {
@@ -773,8 +779,8 @@ div.application-end {
 }
 
 div.wheel-result, div.opener-result {
-    width: 400px;
-    height: 250px;
+    width: min(400px, 95vw);
+    height: 300px;
     background: 
     repeating-linear-gradient(310deg, rgba(128, 128, 128, 0.6) 12%,
    rgba(211, 211, 211, 0.5) 32%, rgba(128, 128, 128, 0.6) 40%,
@@ -792,7 +798,8 @@ div.wheel-result, div.opener-result {
     font-size: 175%;
     visibility: hidden;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
     overflow: auto;
     transition: all 0s, visibility 0.4s, top var(--topTrans, 0.7s);
@@ -1086,6 +1093,7 @@ button.rng-generate {
     width: 60%;
     height: 30%;
     justify-self: center;
+    text-align: center;
     border-radius: 20px;
     font-size: 200%;
 }
