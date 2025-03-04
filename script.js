@@ -359,7 +359,7 @@ function application_end(application) {
             application.classList.remove("application-end");
         }, 900);
         menu.classList.remove("hidden");
-        frontpage.style.display = "inline";
+        frontpage.style.display = "block";
         footer.style.display = "grid";
         window.scrollTo(0, 0);
     }
@@ -744,14 +744,8 @@ function opener_generate() {
         option.classList.add("opener-block");
         opener_spinner.appendChild(option);
     }
-    let width = window.matchMedia("(max-width: 1000px)");
-    let height = window.matchMedia("max-height: 500px");
     opener_spinner.style.width = "14020px";
-    if (width.matches || height.matches) {
-        opener_spinner.style.right = "221px";
-    } else {
-        opener_spinner.style.right = "50px";
-    }
+    opener_spinner.style.right = "50px";
 }
 
 opener_files_btn.addEventListener("click", () => {
@@ -888,13 +882,7 @@ function opener_roll() {
         opener_roll_btn.style.cursor = "not-allowed";
         opener_roll_btn.innerText = "Rolling...";
         opener_random = Math.floor(Math.random() * (120 - (-120) + 1) ) + (-120);
-        let width = window.matchMedia("(max-width: 1000px)");
-        let height = window.matchMedia("max-height: 500px");
-        if (width.matches || height.matches) {
-            opener_random = 12912 + opener_random;    
-        } else {
-            opener_random = 12740 + opener_random;
-        }
+        opener_random = 12740 + opener_random;
         opener_spinner.style.setProperty('--spinShift', opener_random + 'px');
         opener_spinner.style.animationName = "rolling";
         opener_spinner.style.animationDuration = "7s";

@@ -36,7 +36,9 @@
   <section>
     <div class="homepage">
       <div class="frontpage">
-        <video id="frontback" src="media/background1.mp4" muted autoplay loop></video>
+        <div class="frontback">
+          <video id="frontback" src="media/background1.mp4" muted autoplay loop></video>
+        </div>
         <div class="fronttext">
           <h1>Randomizer</h1>
         </div>
@@ -181,10 +183,12 @@
     </div>
     <div class="wheel-colors">
       <h2 class="wheel-colors-header">Wheel colors</h2>
-      <input type="color" name="wheel-color" value="#a7c3db">
-      <input type="color" name="wheel-color" value="#06447e">
-      <input type="color" name="wheel-color" value="#43739c">
-      <input type="color" name="wheel-color" value="#3e82bd">
+      <div class="wheel-colors-container">
+        <input type="color" name="wheel-color" value="#a7c3db">
+        <input type="color" name="wheel-color" value="#06447e">
+        <input type="color" name="wheel-color" value="#43739c">
+        <input type="color" name="wheel-color" value="#3e82bd">
+      </div>
       <button class="wheel-colors-apply app-btn">Apply</button>
     </div>
   </div>
