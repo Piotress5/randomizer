@@ -1,5 +1,8 @@
 # Changelog
 
+========= 1.03 ========
+- Added favicon
+
 ========= 1.02 ========
 - Fixed background video on startup on iOS devices,
 - Fixed Yes/No counter position,
